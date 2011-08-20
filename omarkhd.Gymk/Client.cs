@@ -9,7 +9,6 @@ namespace omarkhd.Gymk
 		public string PhoneNumber = string.Empty;
 		public string Email = string.Empty;
 		public long Id;
-		//public string PictureFileName = string.Empty;
 		
 		public Client ()
 		{
