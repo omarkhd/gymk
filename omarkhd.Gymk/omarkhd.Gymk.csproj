@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BC3A9908-97CD-4927-836A-C63A7FE3ED1B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>omarkhd.Gymk</RootNamespace>
+    <AssemblyName>omarkhd.Gymk</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+    <additionalargs>/resource:resources/default_wizard_image.png,default_wizard_image.png /resource:resources/w2.png,w2.png</additionalargs>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Data" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="omarkhd.DataStructures, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\omarkhd.DataStructures.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Sqlite">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Desktop\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="omarkhd.Validation, Version=1.0.4231.24845, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\omarkhd.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Sqlite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="GuiHelper.cs" />
+    <Compile Include="GymkWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.GymkWindow.cs" />
+    <Compile Include="AppHelper.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.Wizard.cs" />
+    <Compile Include="Wizard.cs" />
+    <Compile Include="ClientWizard.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="MemberWizard.cs" />
+    <Compile Include="SessionRegistry.cs" />
+    <Compile Include="SystemDb.cs" />
+    <Compile Include="DbModel.cs" />
+    <Compile Include="ClientModel.cs" />
+    <Compile Include="Member.cs" />
+    <Compile Include="ConfigWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.ConfigWindow.cs" />
+    <Compile Include="AreasWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.AreasWindow.cs" />
+    <Compile Include="CrudState.cs" />
+    <Compile Include="AreaModel.cs" />
+    <Compile Include="Area.cs" />
+    <Compile Include="PacksWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.PacksWindow.cs" />
+    <Compile Include="Pack.cs" />
+    <Compile Include="PackModel.cs" />
+    <Compile Include="SelectAreasWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.SelectAreasWindow.cs" />
+    <Compile Include="SpDate.cs" />
+    <Compile Include="DateWidget.cs" />
+    <Compile Include="Contact.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
