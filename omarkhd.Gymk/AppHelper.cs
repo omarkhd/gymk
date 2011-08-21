@@ -13,7 +13,7 @@ namespace omarkhd.Gymk
 			AppHelper.LogToFile = false;	
 			try
 			{
-				FileStream file_stream = new FileStream("gymk.log", FileMode.Append, FileAccess.Write);
+				FileStream file_stream = new FileStream("data/gymk.log", FileMode.Append, FileAccess.Write);
 				AppHelper.FileLog = new StreamWriter(file_stream);
 				AppHelper.LogToFile = true;
 			}
@@ -71,7 +71,7 @@ namespace omarkhd.Gymk
 			SessionRegistry r = SessionRegistry.GetInstance();
 			r["author"] = "Omar Karim Martín Cornejo";
 			r["author_contact"] = "omarkhd.mx@gmail.com";			
-			r["db_path"] = "db/gymk.db";
+			r["db_path"] = "data/gymk.db";
 			r["gym_name"] = "Géminis";
 		}
 	}
