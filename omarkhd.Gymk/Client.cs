@@ -1,14 +1,22 @@
 using System;
+using Gtk;
+
 namespace omarkhd.Gymk
 {
-	public class Client
+	[TreeNode(ListOnly = true)]
+	public class Client : TreeNode
 	{
 		public string Name = string.Empty;
 		public string Surname = string.Empty;
 		public string Address = string.Empty;
 		public string PhoneNumber = string.Empty;
 		public string Email = string.Empty;
+		
+		[TreeNodeValue(Column = 0)]
 		public long Id;
+		
+		[TreeNodeValue(Column = 1)]
+		public string FullName { get { return this.Name + " " + this.Surname; }}
 		
 		public Client ()
 		{
@@ -18,7 +26,7 @@ namespace omarkhd.Gymk
 		{
 			string ln = Environment.NewLine;
 			string str = string.Empty;
-			str += (string.IsNullOrEmpty(this.Name) ? "" : "Nombre: " + this.Name + " " + this.Surname);
+			str += (string.IsNullOrEmpty(this.Name) ? "" : "Nombre: " + this.FullName);
 			str += (string.IsNullOrEmpty(this.PhoneNumber) ? "" : ln + "Teléfono: " + this.PhoneNumber);
 			str += (string.IsNullOrEmpty(this.Address) ? "" : ln + "Dirección: " + this.Address);
 			str += (string.IsNullOrEmpty(this.Email) ? "" : ln + "Correo electrónico: " + this.Email);

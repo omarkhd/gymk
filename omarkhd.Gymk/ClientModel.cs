@@ -27,6 +27,14 @@ namespace omarkhd.Gymk
 			sql += " left outer join Member m on c.Id = m.Id where m.Id is null";
 			return this.DoReader(sql);
 		}
+		
+		public IDataReader SelectLike(object key)
+		{
+			string like = "'%" + key + "%'";
+			string sql = "select * from " + this.TableName;
+			sql += " where Id like " + like + " or Name like " + like + " or Surname like " + like;
+			return this.DoReader(sql);
+		}
 	}
 }
 

@@ -97,6 +97,8 @@
     <Compile Include="SpDate.cs" />
     <Compile Include="DateWidget.cs" />
     <Compile Include="Contact.cs" />
+    <Compile Include="ClientsWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.ClientsWindow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

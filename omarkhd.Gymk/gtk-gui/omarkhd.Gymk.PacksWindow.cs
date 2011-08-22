@@ -10,6 +10,8 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.Label label4;
 
+		private global::Gtk.HBox hbox24;
+
 		private global::Gtk.VBox vbox7;
 
 		private global::Gtk.HSeparator hseparator2;
@@ -18,7 +20,7 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.HBox hbox4;
 
-		private global::Gtk.Label label5;
+		private global::Gtk.Label label1;
 
 		private global::Gtk.Entry NameEntry;
 
@@ -96,6 +98,10 @@ namespace omarkhd.Gymk
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child vbox6.Gtk.Box+BoxChild
+			this.hbox24 = new global::Gtk.HBox ();
+			this.hbox24.Name = "hbox24";
+			this.hbox24.Spacing = 6;
+			// Container child hbox24.Gtk.Box+BoxChild
 			this.vbox7 = new global::Gtk.VBox ();
 			this.vbox7.Name = "vbox7";
 			this.vbox7.Spacing = 6;
@@ -116,19 +122,14 @@ namespace omarkhd.Gymk
 			this.hbox4.Name = "hbox4";
 			this.hbox4.Spacing = 6;
 			// Container child hbox4.Gtk.Box+BoxChild
-			this.label5 = new global::Gtk.Label ();
-			this.label5.WidthRequest = 60;
-			this.label5.Name = "label5";
-			this.label5.LabelProp = global::Mono.Unix.Catalog.GetString ("Nombre:");
-			this.label5.Wrap = true;
-			this.label5.Justify = ((global::Gtk.Justification)(2));
-			this.label5.SingleLineMode = true;
-			this.hbox4.Add (this.label5);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.label5]));
+			this.label1 = new global::Gtk.Label ();
+			this.label1.Name = "label1";
+			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("Nombre: ");
+			this.hbox4.Add (this.label1);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.label1]));
 			w4.Position = 0;
 			w4.Expand = false;
 			w4.Fill = false;
-			w4.Padding = ((uint)(2));
 			// Container child hbox4.Gtk.Box+BoxChild
 			this.NameEntry = new global::Gtk.Entry ();
 			this.NameEntry.WidthRequest = 62;
@@ -164,6 +165,7 @@ namespace omarkhd.Gymk
 			this.label6.WidthRequest = 90;
 			this.label6.Name = "label6";
 			this.label6.LabelProp = global::Mono.Unix.Catalog.GetString ("Mensualidad: $");
+			this.label6.Wrap = true;
 			this.hbox5.Add (this.label6);
 			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox5[this.label6]));
 			w8.Position = 0;
@@ -185,6 +187,7 @@ namespace omarkhd.Gymk
 			this.label7.WidthRequest = 74;
 			this.label7.Name = "label7";
 			this.label7.LabelProp = global::Mono.Unix.Catalog.GetString ("Inscripción: $");
+			this.label7.Wrap = true;
 			this.hbox6.Add (this.label7);
 			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox6[this.label7]));
 			w10.Position = 0;
@@ -334,9 +337,13 @@ namespace omarkhd.Gymk
 			this.vbox7.Add (this.vbox9);
 			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.vbox7[this.vbox9]));
 			w28.Position = 2;
-			this.vbox6.Add (this.vbox7);
-			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.vbox6[this.vbox7]));
-			w29.Position = 2;
+			this.hbox24.Add (this.vbox7);
+			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.hbox24[this.vbox7]));
+			w29.Position = 0;
+			w29.Padding = ((uint)(4));
+			this.vbox6.Add (this.hbox24);
+			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.vbox6[this.hbox24]));
+			w30.Position = 2;
 			this.Add (this.vbox6);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

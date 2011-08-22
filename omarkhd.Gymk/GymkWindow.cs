@@ -22,6 +22,7 @@ namespace omarkhd.Gymk
 			this.QuitAction.Activated += this.Quit;
 			this.AreasAction.Activated += this.LaunchAreas;
 			this.PacksAction.Activated += this.LaunchPacks;
+			this.ClientsAction.Activated += this.LaunchClients;
 			this.ConfigAction.Activated += this.LaunchPreferences;
 		}
 		
@@ -71,6 +72,13 @@ namespace omarkhd.Gymk
 		{
 			PacksWindow w = new PacksWindow();
 			w.Modal = true;
+			w.TransientFor = this;
+			w.ShowAll();
+		}
+		
+		private void LaunchClients(object sender, EventArgs args)
+		{
+			ClientsWindow w = new ClientsWindow();
 			w.TransientFor = this;
 			w.ShowAll();
 		}
