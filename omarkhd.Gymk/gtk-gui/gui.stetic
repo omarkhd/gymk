@@ -5,7 +5,7 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="..\bin\Debug\omarkhd.Gymk.exe" internal="true" />
+    <widget-library name="../bin/Debug/omarkhd.Gymk.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="omarkhd.Gymk.GymkWindow" design-size="451 300">
     <action-group name="Default">

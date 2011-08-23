@@ -28,12 +28,21 @@ namespace omarkhd.Gymk
 			return this.DoReader(sql);
 		}
 		
-		public IDataReader SelectLike(object key)
+		public IDataReader GetAllLike(object key)
 		{
 			string like = "'%" + key + "%'";
 			string sql = "select * from " + this.TableName;
 			sql += " where Id like " + like + " or Name like " + like + " or Surname like " + like;
 			return this.DoReader(sql);
+		}
+		
+		public bool Update(Client c)
+		{
+			string sql = "update Client set Name = '" + c.Name + "', ";
+			sql += "Surname = '" + c.Surname + "', Address = '" + c.Address + "', ";
+			sql += "PhoneNumber = '" + c.PhoneNumber + "', Email = '" + c.Email + "' ";
+			sql += "where " + this.IdName + " = '" + c.Id + "'";
+			return this.DoNonQuery(sql) > 0;
 		}
 	}
 }

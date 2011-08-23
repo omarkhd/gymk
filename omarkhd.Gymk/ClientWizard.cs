@@ -68,6 +68,7 @@ namespace omarkhd.Gymk
 			this.Header = "";
 			this.Description = "Introduzca la información de contacto del nuevo cliente";
 			this.CanGoPrevious = true;
+			this.NextLabel = "Siguiente";
 			//creating ui
 			Label name_label = new Label("Nombre(s)");
 			Label surname_label = new Label("Apellido(s)");

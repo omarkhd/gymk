@@ -32,7 +32,7 @@ namespace omarkhd.Gymk
 			this.CleanForm();
 			
 			ClientModel m = new ClientModel();
-			this.FillNodeView(m.SelectLike(this.SearchEntry.Text));
+			this.FillNodeView(m.GetAllLike(this.SearchEntry.Text));
 			this.ClientsNodeView.Sensitive = true;
 		}
 		
@@ -59,6 +59,7 @@ namespace omarkhd.Gymk
 			this.EditButton.Clicked += this.DoEdit;
 			this.CancelButton.Clicked += this.DoCancel;
 			this.SearchEntry.Changed += this.DoSearch;
+			this.OkButton.Clicked += this.DoOk;
 		}
 		
 		private void FillNodeView()
@@ -158,9 +159,29 @@ namespace omarkhd.Gymk
 		{
 			string like = this.SearchEntry.Text;
 			ClientModel model = new ClientModel();
-			this.FillNodeView(model.SelectLike(like));
+			this.FillNodeView(model.GetAllLike(like));
 			this.CleanForm();
 			this.EditButton.Sensitive = false;
+		}
+		
+		private void DoOk(object sender, EventArgs args)
+		{
+			Client c = this.CurrentClient;
+			c.Name = this.NameEntry.Text;
+			c.Surname = this.SurnameEntry.Text;
+			c.Address = this.AddressEntry.Text;
+			c.PhoneNumber = this.PhoneEntry.Text;
+			c.Email = this.EmailEntry.Text;
+			
+			ClientModel model = new ClientModel();
+			if(!model.Update(c))
+			{
+				GuiHelper.ShowError(this, "Ha ocurrido un error en la actualización del cliente");
+				return;
+			}
+			
+			this.Init();
+			this.SelectClient(this.CurrentClient);
 		}
 	}
 }
