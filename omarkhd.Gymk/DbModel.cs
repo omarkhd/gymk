@@ -6,7 +6,7 @@ namespace omarkhd.Gymk
 {
 	public class DbModel
 	{
-		public IDbConnection Db; //change this!
+		private SqliteConnection Db; //change this!
 		protected string TableName;
 		protected string IdName;
 		private IDataReader LastDataReader;
@@ -31,22 +31,22 @@ namespace omarkhd.Gymk
 		
 		public IDataReader GetAll() 
 		{
-			return this.GetAll(-1, -1);
+			return this.GetAll(-1, -1); //limitless
 		}
 		
 		public IDataReader GetById(object key)
 		{
 			string sql = "select * from " + this.TableName;
-			sql += " where " + this.IdName + " = '" + key + "'";
+			sql += " where " + this.IdName + " = @p0";
 			
-			return this.DoReader(sql);
+			return this.DoReader(sql, key);
 		}
 		
 		public IDataReader GetBy(string column, object key)
 		{
 			string sql = "select * from " + this.TableName;
-			sql += " where " + column + " = '" + key + "'";
-			return this.DoReader(sql);
+			sql += " where " + column + " = @p0";
+			return this.DoReader(sql, key);
 		}
 		
 		public long DeleteAll()
@@ -63,26 +63,26 @@ namespace omarkhd.Gymk
 		public long DeleteBy(string column_name, object key)
 		{
 			string sql = "delete from " + this.TableName;
-			sql += " where " + column_name + " = '" + key + "'";
-			return (long) this.DoNonQuery(sql);
+			sql += " where " + column_name + " = @p0";
+			return (long) this.DoNonQuery(sql, key);
 		}
 		
 		public bool ExistsById(object key)
 		{
 			string sql = "select count(*) from " + this.TableName;
-			sql += " where " + this.IdName + " = '" + key + "'";
-			return ((long) this.DoScalar(sql)) > 0;
+			sql += " where " + this.IdName + " = @p0";
+			return ((long) this.DoScalar(sql, key)) > 0;
 		}
 		
 		public bool Insert(params object[] p)
 		{
 			string sql = "insert into " + this.TableName + " values(";
-			foreach(var param in p)
-				sql += (param == null ? "null" : "'" + param + "'") + ", ";
+			for(int i = 0; i < p.Length; i++)
+				sql += "@p" + i + ", ";
 			sql = sql.Substring(0, sql.Length - 2);
 			sql += ")";
 			
-			return (((long) this.DoNonQuery(sql)) == 1 ? true : false);
+			return (((long) this.DoNonQuery(sql, p)) == 1 ? true : false);
 		}
 		
 		public long Count()
@@ -100,11 +100,12 @@ namespace omarkhd.Gymk
 			}
 		}
 		
-		protected object DoScalar(string sql)
+		protected object DoScalar(string sql, params object[] args)
 		{
 			AppHelper.Log(sql);
-			IDbCommand cmd = this.Db.CreateCommand();
+			SqliteCommand cmd = this.Db.CreateCommand();
 			cmd.CommandText = sql;
+			this.PutParameters(cmd, args);
 			object result = -1; //for convenience
 			try
 			{
@@ -119,11 +120,12 @@ namespace omarkhd.Gymk
 			return result;
 		}
 		
-		protected long DoNonQuery(string sql)
+		protected long DoNonQuery(string sql, params object[] args)
 		{
 			AppHelper.Log(sql);
-			IDbCommand cmd = this.Db.CreateCommand();
+			SqliteCommand cmd = this.Db.CreateCommand();
 			cmd.CommandText = sql;
+			this.PutParameters(cmd, args);
 			long rows_affected = -1;
 			try
 			{
@@ -138,16 +140,40 @@ namespace omarkhd.Gymk
 			return rows_affected;
 		}
 		
-		protected IDataReader DoReader(string sql)
+		protected IDataReader DoReader(string sql, params object[] args)
 		{
 			AppHelper.Log(sql);
-			IDbCommand cmd = this.Db.CreateCommand();
+			SqliteCommand cmd = this.Db.CreateCommand();
 			cmd.CommandText = sql;
+			this.PutParameters(cmd, args);
+			IDataReader reader = null;
 			
 			if(this.LastDataReader != null && !this.LastDataReader.IsClosed)
 				this.LastDataReader.Close();
-			this.LastDataReader = cmd.ExecuteReader();
-			return this.LastDataReader;
+				
+			try
+			{
+				reader = cmd.ExecuteReader();
+				this.LastDataReader = reader;
+			}
+			
+			catch(SqliteException e)
+			{
+				AppHelper.Log(e.Message + ", " + e.StackTrace);
+			}
+			
+			return reader;
+		}
+		
+		protected void PutParameters(SqliteCommand cmd, object[] args)
+		{
+			for(int i = 0; i < args.Length; i++)
+			{
+				string p_name = "@p" + i;				
+				SqliteParameter p = new SqliteParameter(p_name, args[i]);
+				cmd.Parameters.Add(p);				
+				cmd.Prepare();
+			}
 		}
 	}
 }

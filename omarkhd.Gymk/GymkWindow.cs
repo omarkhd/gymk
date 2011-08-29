@@ -34,13 +34,55 @@ namespace omarkhd.Gymk
 		
 		private void NewEnrollment(object sender, EventArgs args)
 		{
-			MemberWizard cw = new MemberWizard();
-			cw.Run();
+			MemberWizard ww = new MemberWizard();
+			
+			ww.SuccessEvent += (object o) =>
+			{
+				Member m = (Member) o;
+				Client c = m.InnerClient;
+				bool error = false;
+				
+				ClientModel cm = new ClientModel();
+				MemberModel mm = new MemberModel();
+				
+				///adding the new client if needed
+				if(c.Id == -1) //-1 = new client
+				{
+					cm.Insert(c);
+					c.Id = cm.LastInsertId;
+				}
+					
+				//add the contact info
+				if(m.InnerContact.Name.Length > 0)
+				{
+					DbModel contact_m = new DbModel("Contact");
+					contact_m.Insert(null, m.InnerContact.Name, m.InnerContact.PhoneNumber);
+					m.InnerContact.Id = contact_m.LastInsertId;
+				}
+				
+				//adding the member
+				m.Id = c.Id;
+				mm.Insert(m);				
+				
+				//adding the membership debt
+				if(m.ChargeMembership)
+				{
+					DbModel mship_m = new DbModel("MembershipDebt");
+					mship_m.Insert(m.Id, null);
+				}
+				
+				
+				
+									
+			};
+			
+			ww.Run();
 		}
 		
 		private void NewClient(object sender, EventArgs args)
 		{
 			ClientWizard w = new ClientWizard();
+			
 			w.SuccessEvent += (object c) =>
 			{
 				Client client = (Client) c;

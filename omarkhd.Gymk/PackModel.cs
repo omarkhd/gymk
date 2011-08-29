@@ -18,31 +18,31 @@ namespace omarkhd.Gymk
 		public bool Exists(Pack p)
 		{
 			string sql = "select count(*) from " + this.TableName;
-			sql += " where Name = '" + p.Name + "'";
-			return ((long) this.DoScalar(sql)) > 0;
+			sql += " where Name = @p0"; //+ p.Name + "'";
+			return ((long) this.DoScalar(sql, p.Name)) > 0;
 		}
 		
 		public bool ExistsExcept(Pack p)
 		{
 			string sql = "select count(*) from ";
-			sql += "(select * from " + this.TableName + " where " + this.IdName + " != '" + p.Id + "')";
-			sql += " a where a.Name = '" + p.Name + "'";
-			return ((long) this.DoScalar(sql)) > 0;
+			sql += "(select * from " + this.TableName + " where " + this.IdName + " != @p0)"; //+ p.Id + "')";
+			sql += " a where a.Name = @p1"; //+ p.Name + "'";
+			return ((long) this.DoScalar(sql, p.Id, p.Name)) > 0;
 		}
 		
 		public bool Update(Pack p)
 		{
-			string sql = "update " + this.TableName + " set Name = '" + p.Name + "'";
-			sql += ", Price = '" + p.Price + "', Membership = '" + p.Membership + "' ";
-			sql += "where " + this.IdName + " = " + p.Id;
-			return ((long) this.DoNonQuery(sql)) > 0;
+			string sql = "update " + this.TableName + " set Name = @p0"; //+ p.Name + "'";
+			sql += ", Price = @p1, Membership = @p2 ";
+			sql += "where " + this.IdName + " = @p3"; //+ p.Id;
+			return ((long) this.DoNonQuery(sql, p.Name, p.Price, p.Membership, p.Id)) > 0;
 		}
 		
 		public IDataReader GetAreas(Pack p)
 		{
 			string sql = "select a.* from Area a inner join PackArea pa on a.Id = pa.Area ";
-			sql += "where pa.Pack = '" + p.Id + "'";
-			return this.DoReader(sql);
+			sql += "where pa.Pack = @p0"; //+ p.Id + "'";
+			return this.DoReader(sql, p.Id);
 		}
 		
 		public int InsertAreas(Pack p)

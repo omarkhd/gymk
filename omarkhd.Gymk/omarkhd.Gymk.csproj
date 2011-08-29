@@ -99,6 +99,7 @@
     <Compile Include="Contact.cs" />
     <Compile Include="ClientsWindow.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.ClientsWindow.cs" />
+    <Compile Include="MemberModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

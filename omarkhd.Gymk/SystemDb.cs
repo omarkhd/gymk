@@ -7,14 +7,14 @@ namespace omarkhd.Gymk
 {
 	public static class SystemDb
 	{
-		private static IDbConnection Connection; // SQLiteConnection
+		private static SqliteConnection Connection; // SQLiteConnection
 		
 		static SystemDb()
 		{
 			Connection = null;
 		}
 		
-		public static IDbConnection GetConnection()
+		public static SqliteConnection GetConnection()
 		{
 			if(SystemDb.Connection == null)
 				SystemDb.MakeConnection();

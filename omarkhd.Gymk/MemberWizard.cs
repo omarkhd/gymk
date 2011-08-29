@@ -179,11 +179,18 @@ namespace omarkhd.Gymk
 					search_button.Sensitive = !state;
 				};
 				
-				id_spin.Changed += (object sender, EventArgs args) => this.ClientId = id_spin.ValueAsInt;
+				id_spin.Changed += (object sender, EventArgs args) => 
+				{
+					int id;
+					this.ClientId = (int.TryParse(id_spin.Text, out id) ? id : id_spin.ValueAsInt);
+					//this.ClientId = id_spin.ValueAsInt;
+				};
+				
+				id_spin.Value = this.ClientId;
 				
 				test_button.Clicked += (object sender, EventArgs args) =>
 				{
-					long id = long.Parse(id_spin.Text);
+					long id = this.ClientId;
 					ClientModel m = new ClientModel();
 					if(m.ExistsById(id))
 					{
@@ -197,10 +204,9 @@ namespace omarkhd.Gymk
 						c.Email = (string) r["Email"];
 						c.PhoneNumber = r["PhoneNumber"].ToString();
 						
-						string s = c.Name + " " + c.Surname;
-						s += (string.IsNullOrEmpty(c.Address) ? "": "\nDirección: " + c.Address);
-						s += (string.IsNullOrEmpty(c.Email) ? "": "\nMail: " + c.Email);
-						s += (string.IsNullOrEmpty(c.PhoneNumber) ? "": "\nTel.: " + c.PhoneNumber);
+						string s = c.ToString();
+						if(m.IsMember(c))
+							s += "\n(Ya es miembro)";
 						info_label.Text = s;
 					}
 					
@@ -229,9 +235,26 @@ namespace omarkhd.Gymk
 			if(this.TargetMember.InnerClient == null)
 			{
 				ClientModel cm = new ClientModel();
-				if(!cm.ExistsById(this.ClientId))
+				bool error = false;
+				string msg = "";
+				Client c = new Client();
+				c.Id = this.ClientId;
+				
+				if(!cm.ExistsById(c.Id))
 				{
-					GuiHelper.ShowError("No se puede encontrar al número de cliente " + this.ClientId);
+					msg = "No se puede encontrar al número de cliente " + this.ClientId;
+					error = true;
+				}
+				
+				else if(cm.IsMember(c))
+				{
+					msg = "El cliente elegido ya es un miembro del gimnasio";
+					error = true;
+				}
+				
+				if(error)
+				{
+					GuiHelper.ShowError(this, msg);
 					this.Step -= 1;
 					return;
 				}
@@ -275,10 +298,19 @@ namespace omarkhd.Gymk
 			Entry contact_name_entry = new Entry();
 			Entry contact_phone_entry = new Entry();			
 			
-			weight_spin.Changed += (s, a) => this.TargetMember.Weight = weight_spin.Value;
-			height_spin.Changed += (s, a) => this.TargetMember.Height = height_spin.Value;
+			weight_spin.Changed += (s, a) =>
+			{
+				float weight;
+				this.TargetMember.Weight = (float.TryParse(weight_spin.Text, out weight) ? weight : weight_spin.Value);
+			};
+			
+			height_spin.Changed += (s, a) => 
+			{
+				float height;
+				this.TargetMember.Height = (float.TryParse(height_spin.Text, out height) ? height : height_spin.Value);
+			};
+			
 			gender_combo.Changed += (s, a) => this.TargetMember.Gender = (gender_combo.Active == 0 ? 'm' : 'f');
-			weight_spin.Changed += (s, a) => this.TargetMember.Weight = weight_spin.Value;
 			contact_name_entry.Changed += (s, a) => this.TargetMember.InnerContact.Name = contact_name_entry.Text.Trim();
 			contact_phone_entry.Changed += (s, a) => this.TargetMember.InnerContact.PhoneNumber = contact_phone_entry.Text.Trim();
 			dw.Changed += (s, a) => this.TargetMember.BirthDate = dw.Date;
@@ -308,15 +340,22 @@ namespace omarkhd.Gymk
 			//return to the previous
 			
 			Validation.Validator v = new Validation.Validator();
-			Contact c = this.TargetMember.InnerContact;
-			v.SetRule(c.Name, "nombre de contacto", 2, 50);
-			v.SetRule(c.PhoneNumber, "teléfono de contacto", 7, 13, Validation.ValidationRule.Number);
+			Contact ct = this.TargetMember.InnerContact;
+			v.SetRule(ct.Name, "nombre de contacto", 2, 50);
+			v.SetRule(ct.PhoneNumber, "teléfono de contacto", 7, 13, Validation.ValidationRule.Number);
 			Validation.ValidationResponse r = v.Run();
 			if(!r.Status)
 			{
 				string s = "";
 				for(int i = 0; i < r.Messages.Length; s += r.Messages[i++] + "\n");
 				GuiHelper.ShowError(s);
+				this.Step -= 1;
+				return;
+			}
+			
+			else if(!(string.IsNullOrEmpty(ct.Name) == string.IsNullOrEmpty(ct.PhoneNumber)))
+			{
+				GuiHelper.ShowError(this, "Si va a proporcionar los datos de contacto, debe proporcionar ambos");
 				this.Step -= 1;
 				return;
 			}
@@ -533,11 +572,21 @@ namespace omarkhd.Gymk
 				r2.Read();
 				this.TargetMember.Pack = (long) r2["Id"];
 			};
-				
+			
+			CheckButton month_check = new CheckButton("Cobrar primer mes");
+			CheckButton membership_check = new CheckButton("Cobrar inscripción");				
+			
+			month_check.Active = this.TargetMember.ChargeFirstMonth;
+			membership_check.Active = this.TargetMember.ChargeMembership;
+			month_check.Toggled += (object s, EventArgs args) => this.TargetMember.ChargeFirstMonth = ((CheckButton) s).Active;
+			membership_check.Toggled += (object s, EventArgs args) => this.TargetMember.ChargeMembership = ((CheckButton) s).Active;
 			
 			this.PackWidgetPair(l1, pack_combo);
 			this.PackWidgetPair(l2, dw_since.Box);
 			this.PackWidgetPair(l3, payment_day_spin);
+			this.PackWidgetSingle(new Label("\n"));
+			this.PackWidgetSingle(month_check);
+			this.PackWidgetSingle(membership_check);
 			this.ContentVBox.ShowAll();
 		}
 		
@@ -547,11 +596,15 @@ namespace omarkhd.Gymk
 			this.Description = "Se dará de alta al siguiente nuevo miembro del gimnasio";
 			this.NextLabel = "Aceptar";
 			
-			Pixbuf pixbuf;			
-			pixbuf = new Pixbuf(this.TargetMember.BinImage);
-			double s = 0.4;
-			pixbuf = pixbuf.ScaleSimple((int) (pixbuf.Width * s), (int) (pixbuf.Height * s), InterpType.Bilinear);
-			Gtk.Image img = new Gtk.Image(pixbuf);
+			Gtk.Image img = null;
+			if(this.TargetMember.BinImage != null)
+			{
+				Pixbuf pixbuf;			
+				pixbuf = new Pixbuf(this.TargetMember.BinImage);
+				double s = 0.4;
+				pixbuf = pixbuf.ScaleSimple((int) (pixbuf.Width * s), (int) (pixbuf.Height * s), InterpType.Bilinear);
+				img = new Gtk.Image(pixbuf);
+			}
 			
 			ClientModel cm = new ClientModel();
 			Client client = null;
@@ -567,6 +620,7 @@ namespace omarkhd.Gymk
 				client.Address = (string) r["Address"];
 				client.PhoneNumber = ((decimal) r["PhoneNumber"]).ToString();
 				client.Email = (string) r["Email"];
+				this.TargetMember.InnerClient = client;
 			}
 			
 			else
@@ -576,15 +630,14 @@ namespace omarkhd.Gymk
 			}
 				
 			PackModel pm = new PackModel();
-			Pack pack = new Pack();
 			IDataReader pr = pm.GetById(this.TargetMember.Pack);
 			pr.Read();
 			string p_name = (string) pr["Name"];
 			double p_price = (float) pr["Price"];
 			string str_pay = string.Empty;
-			str_pay += "Fecha de ingreso: " + this.TargetMember.JoinDate;
+			str_pay += "Fecha de ingreso: " + this.TargetMember.JoinDate.ToString("dd/MM/yyyy");
 			str_pay += "\nDía de pago: " + this.TargetMember.PaymentDay + " de cada mes";		
-			str_pay += "\nInscrito a : " + p_name + " ($" + p_price + " mensuales)";
+			str_pay += "\nInscrito a : " + p_name + " (" + string.Format("{0:C}", p_price) + " mensuales)";
 			
 			string ct_str = string.Empty;
 			if(this.TargetMember.InnerContact != null)
@@ -594,7 +647,8 @@ namespace omarkhd.Gymk
 				ct_str += "Teléfono: " + this.TargetMember.InnerContact.PhoneNumber;
 			}
 			
-			this.PackWidgetSingle(img);			
+			if(img != null)
+				this.PackWidgetSingle(img);			
 			this.PackWidgetSingle(new Label(client.ToString()));
 			this.PackWidgetSingle(new Label(this.TargetMember.ToString()));
 			this.PackWidgetSingle(new Label(str_pay));

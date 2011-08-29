@@ -16,6 +16,10 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.Label label1;
 
+		private global::Gtk.Label label2;
+
+		private global::Gtk.Label label3;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -58,12 +62,30 @@ namespace omarkhd.Gymk
 			// Notebook tab
 			this.label1 = new global::Gtk.Label ();
 			this.label1.Name = "label1";
-			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("page1");
+			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("Info");
 			this.notebook1.SetTabLabel (this.vbox2, this.label1);
 			this.label1.ShowAll ();
+			// Notebook tab
+			global::Gtk.Label w4 = new global::Gtk.Label ();
+			w4.Visible = true;
+			this.notebook1.Add (w4);
+			this.label2 = new global::Gtk.Label ();
+			this.label2.Name = "label2";
+			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Pagos");
+			this.notebook1.SetTabLabel (w4, this.label2);
+			this.label2.ShowAll ();
+			// Notebook tab
+			global::Gtk.Label w5 = new global::Gtk.Label ();
+			w5.Visible = true;
+			this.notebook1.Add (w5);
+			this.label3 = new global::Gtk.Label ();
+			this.label3.Name = "label3";
+			this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("Usuarios");
+			this.notebook1.SetTabLabel (w5, this.label3);
+			this.label3.ShowAll ();
 			this.vbox1.Add (this.notebook1);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.notebook1]));
-			w4.Position = 1;
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.notebook1]));
+			w6.Position = 1;
 			this.Add (this.vbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

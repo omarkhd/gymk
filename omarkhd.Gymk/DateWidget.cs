@@ -71,7 +71,7 @@ namespace omarkhd.Gymk
 			int month = SpDate.GetMonthNumber(this.MonthCombo.ActiveText);
 			int day = this.DaySpin.ValueAsInt;
 			int in_month = DateTime.DaysInMonth(year, month);
-			this.DaySpin.SetRange(0, DateTime.DaysInMonth(year, month));
+			this.DaySpin.SetRange(1, DateTime.DaysInMonth(year, month));
 			this.DaySpin.Value = (day > in_month ? in_month : day);
 		}
 		

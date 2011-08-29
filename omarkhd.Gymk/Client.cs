@@ -27,7 +27,7 @@ namespace omarkhd.Gymk
 			string ln = Environment.NewLine;
 			string str = string.Empty;
 			str += (string.IsNullOrEmpty(this.Name) ? "" : "Nombre: " + this.FullName);
-			str += (string.IsNullOrEmpty(this.PhoneNumber) ? "" : ln + "Teléfono: " + this.PhoneNumber);
+			str += (string.IsNullOrEmpty(this.PhoneNumber) || this.PhoneNumber == "0" ? "" : ln + "Teléfono: " + this.PhoneNumber);
 			str += (string.IsNullOrEmpty(this.Address) ? "" : ln + "Dirección: " + this.Address);
 			str += (string.IsNullOrEmpty(this.Email) ? "" : ln + "Correo electrónico: " + this.Email);
 			return str;

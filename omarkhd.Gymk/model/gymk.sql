@@ -6,6 +6,9 @@ drop table if exists Contact;
 drop table if exists Area;
 drop table if exists Pack;
 drop table if exists PackArea;
+drop table if exists Payment;
+drop table if exists MonthlyCharge;
+drop view if exists payment_with_total;
 
 create table Client
 (
@@ -37,11 +40,13 @@ create table Member
 	BirthDate date,
 	PaymentDay integer not null,
 	JoinDate date not null,
+	Pack integer not null,
 	Contact integer,
 	Photo blob,
 	constraint Member_pk primary key(Id),
 	constraint Member_pk_fk foreign key(Id) references Client(Id),
-	constraint Member_fk1 foreign key(Contact) references Contact(Id)
+	constraint Member_fk1 foreign key(Contact) references Contact(Id),
+	constraint Pack_fk foreign key(Pack) references Pack(Id)
 );
 
 create table Area
@@ -66,3 +71,35 @@ create table PackArea
 	Area integer not null,
 	constraint PackArea_pk primary key(Pack, Area)
 );
+
+create table Payment
+(
+	Id integer not null,
+	PaymentDate date not null,
+	Amount real not null,
+	Discount real not null,
+	constraint Payment_pk primary key(Id)
+);
+
+create table MonthlyCharge
+(
+	Member integer not null,
+	Payment integer,
+	StartDate date not null,
+	EndDate date not null,
+	Notes text,
+	constraint MonthlyCharge_pk primary key(Member, StartDate, EndDate),
+	constraint MonthlyCharge_fk foreign key(Member) references Member(Id)
+);
+
+create table MembershipDebt
+(
+	Member integer not null,
+	Payment integer,
+	constraint MembershipDebt_pk primary key(Member),
+	constraint MembershipDebt_fk foreign key(Member) references Member(Id),
+	constraint MembershipDebt_fk2 foreign key(Payment) references Payment(Id)
+);
+
+create view payment_with_total as
+select p.*, p.Amount - p.Discount as Total from Payment p;

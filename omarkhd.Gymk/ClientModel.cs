@@ -17,8 +17,8 @@ namespace omarkhd.Gymk
 		public bool Exists(Client c)
 		{
 			string sql = "select count(*) from " + this.TableName;
-			sql += " where Name = '" + c.Name + "' and Surname = '" + c.Surname + "'";
-			return (((long) this.DoScalar(sql)) > 0 ? true : false);
+			sql += " where Name = @p0 and Surname = @p1";
+			return (((long) this.DoScalar(sql, c.Name, c.Surname)) > 0 ? true : false);
 		}
 		
 		public IDataReader GetNonMembers()
@@ -30,19 +30,24 @@ namespace omarkhd.Gymk
 		
 		public IDataReader GetAllLike(object key)
 		{
-			string like = "'%" + key + "%'";
+			string like = "%" + key + "%";
 			string sql = "select * from " + this.TableName;
-			sql += " where Id like " + like + " or Name like " + like + " or Surname like " + like;
-			return this.DoReader(sql);
+			sql += " where Id = @p0 or Name like @p1 or Surname like @p2";
+			return this.DoReader(sql, key, like, like);
 		}
 		
 		public bool Update(Client c)
 		{
-			string sql = "update Client set Name = '" + c.Name + "', ";
-			sql += "Surname = '" + c.Surname + "', Address = '" + c.Address + "', ";
-			sql += "PhoneNumber = '" + c.PhoneNumber + "', Email = '" + c.Email + "' ";
-			sql += "where " + this.IdName + " = '" + c.Id + "'";
-			return this.DoNonQuery(sql) > 0;
+			string sql = "Update " + this.TableName + " set Name = @p0, ";
+			sql += "Surname = @p1, Address = @p2, PhoneNumber = @p3, Email = @p4 ";
+			sql += "where " + this.IdName + " = @p5";
+			return this.DoNonQuery(sql, c.Name, c.Surname, c.Address, c.PhoneNumber, c.Email, c.Id) > 0;
+		}
+		
+		public bool IsMember(Client c)
+		{
+			string sql = "select count(*) from Member where Id = @p0";
+			return ((long) this.DoScalar(sql, c.Id)) > 0;
 		}
 	}
 }
