@@ -77,21 +77,16 @@
     <Compile Include="Client.cs" />
     <Compile Include="MemberWizard.cs" />
     <Compile Include="SessionRegistry.cs" />
-    <Compile Include="SystemDb.cs" />
-    <Compile Include="DbModel.cs" />
-    <Compile Include="ClientModel.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="ConfigWindow.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.ConfigWindow.cs" />
     <Compile Include="AreasWindow.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.AreasWindow.cs" />
     <Compile Include="CrudState.cs" />
-    <Compile Include="AreaModel.cs" />
     <Compile Include="Area.cs" />
     <Compile Include="PacksWindow.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.PacksWindow.cs" />
     <Compile Include="Pack.cs" />
-    <Compile Include="PackModel.cs" />
     <Compile Include="SelectAreasWindow.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.SelectAreasWindow.cs" />
     <Compile Include="SpDate.cs" />
@@ -99,8 +94,20 @@
     <Compile Include="Contact.cs" />
     <Compile Include="ClientsWindow.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.ClientsWindow.cs" />
-    <Compile Include="MemberModel.cs" />
     <Compile Include="PaymentRuler.cs" />
+    <Compile Include="models\AreaModel.cs" />
+    <Compile Include="models\ClientModel.cs" />
+    <Compile Include="models\MemberModel.cs" />
+    <Compile Include="models\DbModel.cs" />
+    <Compile Include="models\MonthlyChargeModel.cs" />
+    <Compile Include="models\PackModel.cs" />
+    <Compile Include="models\SystemDb.cs" />
+    <Compile Include="models\PaymentModel.cs" />
+    <Compile Include="MonthlyCharge.cs" />
+    <Compile Include="Payment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="models\" />
+  </ItemGroup>
 </Project>

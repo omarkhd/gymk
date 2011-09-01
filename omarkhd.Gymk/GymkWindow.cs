@@ -71,9 +71,7 @@ namespace omarkhd.Gymk
 					mship_m.Insert(m.Id, null);
 				}
 				
-					
-				
-									
+				PaymentRuler.ChargeFirstMonth(m);
 			};
 			
 			ww.Run();

@@ -16,20 +16,16 @@ namespace omarkhd.Gymk
 			get { return this._Date; }
 			set
 			{
-				if(value != null)
-				{
-					this._Date = value;
-					this.Init();
-				}
+				this._Date = value;
+				this.Init();
 			}
 		}
 		public DateWidget(int year, int month, int day) : this(new DateTime(year, month, day)) {}
 		public DateWidget() : this(DateTime.Today) {}	
 		public DateWidget(DateTime date)
 		{
-			this._Date = date;
 			this.Build();
-			this.Init();
+			this.Date = date;
 			this.Connect();
 		}
 		
@@ -37,7 +33,7 @@ namespace omarkhd.Gymk
 		{
 			this.YearSpin = new SpinButton(1900, 2100, 1);
 			this.MonthCombo = new ComboBox(SpDate.GetMonthNames());
-			this.DaySpin = new SpinButton(1, DateTime.DaysInMonth(this.Date.Year, this.Date.Month), 1);
+			this.DaySpin = new SpinButton(1, 28, 1);
 		}
 		
 		private void Init()
@@ -46,6 +42,7 @@ namespace omarkhd.Gymk
 			{
 				this.YearSpin.Value = this.Date.Year;
 				this.MonthCombo.Active = this.Date.Month - 1;
+				this.DaySpin.SetRange(1, DateTime.DaysInMonth(this.Date.Month, this.Date.Year));
 				this.DaySpin.Value = this.Date.Day;
 			}
 			

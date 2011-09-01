@@ -525,7 +525,7 @@ namespace omarkhd.Gymk
 			
 			ComboBox pack_combo;
 			DateWidget dw_since = new DateWidget();
-			SpinButton payment_day_spin = new SpinButton(1, 30, 1);
+			SpinButton payment_day_spin = new SpinButton(1, 31, 1);
 			
 			payment_day_spin.Value = dw_since.Date.Day;
 			

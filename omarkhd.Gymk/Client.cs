@@ -32,6 +32,19 @@ namespace omarkhd.Gymk
 			str += (string.IsNullOrEmpty(this.Email) ? "" : ln + "Correo electrónico: " + this.Email);
 			return str;
 		}
+		
+		public bool Sync()
+		{
+			Client c = ClientModel.FromId(this.Id);
+			if(c == null)
+				return false;
+			this.Name = c.Name;
+			this.Surname = c.Surname;
+			this.Address = c.Address;
+			this.PhoneNumber = c.PhoneNumber;
+			this.Email = c.Email;
+			return true;
+		}
 	}
 }
 
