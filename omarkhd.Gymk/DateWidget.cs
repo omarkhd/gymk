@@ -26,24 +26,25 @@ namespace omarkhd.Gymk
 		{
 			this.Build();
 			this.Date = date;
-			this.Connect();
 		}
 		
 		private void Build()
 		{
 			this.YearSpin = new SpinButton(1900, 2100, 1);
 			this.MonthCombo = new ComboBox(SpDate.GetMonthNames());
-			this.DaySpin = new SpinButton(1, 28, 1);
+			this.DaySpin = new SpinButton(1, 1, 1);
 		}
 		
 		private void Init()
 		{
 			try
 			{
+				this.Disconnect();
 				this.YearSpin.Value = this.Date.Year;
 				this.MonthCombo.Active = this.Date.Month - 1;
-				this.DaySpin.SetRange(1, DateTime.DaysInMonth(this.Date.Month, this.Date.Year));
+				this.DaySpin.SetRange(1, DateTime.DaysInMonth(this.Date.Year, this.Date.Month));
 				this.DaySpin.Value = this.Date.Day;
+				this.Connect();
 			}
 			
 			catch(Exception) {}
@@ -51,10 +52,20 @@ namespace omarkhd.Gymk
 		
 		private void UpdateDate(object sender, EventArgs args)
 		{
-			this.UpdateMonth();
-			int year = this.YearSpin.ValueAsInt;
+			if(this.YearSpin.Text.Length == 0 || this.DaySpin.Text.Length == 0)
+				return;
+			
+			int year = int.TryParse(this.YearSpin.Text, out year) ? (year <= 0 ? 1 : year) : this.YearSpin.ValueAsInt;
 			int month = SpDate.GetMonthNumber(this.MonthCombo.ActiveText);
-			int day = this.DaySpin.ValueAsInt;
+			int day = int.TryParse(this.DaySpin.Text, out day) ? (day <= 0 ? 1 : day) : this.YearSpin.ValueAsInt;
+			int max_days = DateTime.DaysInMonth(year, month);
+			this.DaySpin.SetRange(1, max_days);
+			
+			if(day > max_days)
+			{
+				day = max_days;
+				this.DaySpin.Value = max_days;
+			}
 			
 			this._Date = new DateTime(year, month, day);
 			
@@ -62,21 +73,18 @@ namespace omarkhd.Gymk
 				this.Changed(sender, args);
 		}
 		
-		private void UpdateMonth()
-		{
-			int year = this.YearSpin.ValueAsInt;
-			int month = SpDate.GetMonthNumber(this.MonthCombo.ActiveText);
-			int day = this.DaySpin.ValueAsInt;
-			int in_month = DateTime.DaysInMonth(year, month);
-			this.DaySpin.SetRange(1, DateTime.DaysInMonth(year, month));
-			this.DaySpin.Value = (day > in_month ? in_month : day);
-		}
-		
 		private void Connect()
 		{
 			this.YearSpin.Changed += this.UpdateDate;
 			this.MonthCombo.Changed += this.UpdateDate;
 			this.DaySpin.Changed += this.UpdateDate;
+		}
+		
+		private void Disconnect()
+		{
+			this.YearSpin.Changed -= this.UpdateDate;
+			this.MonthCombo.Changed -= this.UpdateDate;
+			this.DaySpin.Changed -= this.UpdateDate;
 		}
 		
 		private string[] GetDaysArray()

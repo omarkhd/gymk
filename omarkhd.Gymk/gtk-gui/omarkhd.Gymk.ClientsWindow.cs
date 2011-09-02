@@ -76,6 +76,10 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.Entry EmailEntry;
 
+		private global::Gtk.VBox vbox6;
+
+		private global::Gtk.Fixed fixed6;
+
 		private global::Gtk.Label GtkLabel4;
 
 		private global::Gtk.HBox hbox15;
@@ -395,12 +399,28 @@ namespace omarkhd.Gymk
 			w28.Position = 1;
 			w28.Expand = false;
 			w28.Fill = false;
+			// Container child vbox12.Gtk.Box+BoxChild
+			this.vbox6 = new global::Gtk.VBox ();
+			this.vbox6.Name = "vbox6";
+			this.vbox6.Spacing = 6;
+			// Container child vbox6.Gtk.Box+BoxChild
+			this.fixed6 = new global::Gtk.Fixed ();
+			this.fixed6.Name = "fixed6";
+			this.fixed6.HasWindow = false;
+			this.vbox6.Add (this.fixed6);
+			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.vbox6[this.fixed6]));
+			w29.Position = 0;
+			w29.Expand = false;
+			w29.Fill = false;
+			this.vbox12.Add (this.vbox6);
+			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.vbox12[this.vbox6]));
+			w30.Position = 2;
 			this.vbox10.Add (this.vbox12);
-			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.vbox10[this.vbox12]));
-			w29.Position = 2;
+			global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.vbox10[this.vbox12]));
+			w31.Position = 2;
 			this.vbox8.Add (this.vbox10);
-			global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.vbox10]));
-			w30.Position = 1;
+			global::Gtk.Box.BoxChild w32 = ((global::Gtk.Box.BoxChild)(this.vbox8[this.vbox10]));
+			w32.Position = 1;
 			this.GtkAlignment.Add (this.vbox8);
 			this.frame1.Add (this.GtkAlignment);
 			this.GtkLabel4 = new global::Gtk.Label ();
@@ -409,16 +429,16 @@ namespace omarkhd.Gymk
 			this.GtkLabel4.UseMarkup = true;
 			this.frame1.LabelWidget = this.GtkLabel4;
 			this.hbox7.Add (this.frame1);
-			global::Gtk.Box.BoxChild w33 = ((global::Gtk.Box.BoxChild)(this.hbox7[this.frame1]));
-			w33.Position = 1;
-			w33.Expand = false;
-			w33.Fill = false;
-			this.hbox6.Add (this.hbox7);
-			global::Gtk.Box.BoxChild w34 = ((global::Gtk.Box.BoxChild)(this.hbox6[this.hbox7]));
-			w34.Position = 0;
-			this.vbox2.Add (this.hbox6);
-			global::Gtk.Box.BoxChild w35 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hbox6]));
+			global::Gtk.Box.BoxChild w35 = ((global::Gtk.Box.BoxChild)(this.hbox7[this.frame1]));
 			w35.Position = 1;
+			w35.Expand = false;
+			w35.Fill = false;
+			this.hbox6.Add (this.hbox7);
+			global::Gtk.Box.BoxChild w36 = ((global::Gtk.Box.BoxChild)(this.hbox6[this.hbox7]));
+			w36.Position = 0;
+			this.vbox2.Add (this.hbox6);
+			global::Gtk.Box.BoxChild w37 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hbox6]));
+			w37.Position = 1;
 			// Container child vbox2.Gtk.Box+BoxChild
 			this.hbox15 = new global::Gtk.HBox ();
 			this.hbox15.Name = "hbox15";
@@ -430,10 +450,10 @@ namespace omarkhd.Gymk
 			this.EditButton.UseUnderline = true;
 			this.EditButton.Label = global::Mono.Unix.Catalog.GetString ("Editar");
 			this.hbox15.Add (this.EditButton);
-			global::Gtk.Box.BoxChild w36 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.EditButton]));
-			w36.Position = 0;
-			w36.Expand = false;
-			w36.Fill = false;
+			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.EditButton]));
+			w38.Position = 0;
+			w38.Expand = false;
+			w38.Fill = false;
 			// Container child hbox15.Gtk.Box+BoxChild
 			this.DeleteButton = new global::Gtk.Button ();
 			this.DeleteButton.CanFocus = true;
@@ -441,17 +461,17 @@ namespace omarkhd.Gymk
 			this.DeleteButton.UseUnderline = true;
 			this.DeleteButton.Label = global::Mono.Unix.Catalog.GetString ("Eliminar");
 			this.hbox15.Add (this.DeleteButton);
-			global::Gtk.Box.BoxChild w37 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.DeleteButton]));
-			w37.Position = 1;
-			w37.Expand = false;
-			w37.Fill = false;
+			global::Gtk.Box.BoxChild w39 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.DeleteButton]));
+			w39.Position = 1;
+			w39.Expand = false;
+			w39.Fill = false;
 			// Container child hbox15.Gtk.Box+BoxChild
 			this.fixed3 = new global::Gtk.Fixed ();
 			this.fixed3.Name = "fixed3";
 			this.fixed3.HasWindow = false;
 			this.hbox15.Add (this.fixed3);
-			global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.fixed3]));
-			w38.Position = 2;
+			global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.fixed3]));
+			w40.Position = 2;
 			// Container child hbox15.Gtk.Box+BoxChild
 			this.hbox16 = new global::Gtk.HBox ();
 			this.hbox16.Name = "hbox16";
@@ -463,10 +483,10 @@ namespace omarkhd.Gymk
 			this.OkButton.UseUnderline = true;
 			this.OkButton.Label = global::Mono.Unix.Catalog.GetString ("Ok");
 			this.hbox16.Add (this.OkButton);
-			global::Gtk.Box.BoxChild w39 = ((global::Gtk.Box.BoxChild)(this.hbox16[this.OkButton]));
-			w39.Position = 0;
-			w39.Expand = false;
-			w39.Fill = false;
+			global::Gtk.Box.BoxChild w41 = ((global::Gtk.Box.BoxChild)(this.hbox16[this.OkButton]));
+			w41.Position = 0;
+			w41.Expand = false;
+			w41.Fill = false;
 			// Container child hbox16.Gtk.Box+BoxChild
 			this.CancelButton = new global::Gtk.Button ();
 			this.CancelButton.CanFocus = true;
@@ -474,21 +494,21 @@ namespace omarkhd.Gymk
 			this.CancelButton.UseUnderline = true;
 			this.CancelButton.Label = global::Mono.Unix.Catalog.GetString ("Cancelar");
 			this.hbox16.Add (this.CancelButton);
-			global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.hbox16[this.CancelButton]));
-			w40.Position = 1;
-			w40.Expand = false;
-			w40.Fill = false;
-			this.hbox15.Add (this.hbox16);
-			global::Gtk.Box.BoxChild w41 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.hbox16]));
-			w41.Position = 3;
-			w41.Expand = false;
-			w41.Fill = false;
-			this.vbox2.Add (this.hbox15);
-			global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hbox15]));
-			w42.PackType = ((global::Gtk.PackType)(1));
-			w42.Position = 2;
+			global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.hbox16[this.CancelButton]));
+			w42.Position = 1;
 			w42.Expand = false;
 			w42.Fill = false;
+			this.hbox15.Add (this.hbox16);
+			global::Gtk.Box.BoxChild w43 = ((global::Gtk.Box.BoxChild)(this.hbox15[this.hbox16]));
+			w43.Position = 3;
+			w43.Expand = false;
+			w43.Fill = false;
+			this.vbox2.Add (this.hbox15);
+			global::Gtk.Box.BoxChild w44 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hbox15]));
+			w44.PackType = ((global::Gtk.PackType)(1));
+			w44.Position = 2;
+			w44.Expand = false;
+			w44.Fill = false;
 			this.Add (this.vbox2);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

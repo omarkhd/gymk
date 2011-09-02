@@ -224,6 +224,7 @@ namespace omarkhd.Gymk
 				
 				this.ClientByIdButton.Click();
 				this.ContentVBox.ShowAll();
+				id_spin.HasFocus = true;
 			}
 		}
 		

@@ -6,7 +6,7 @@ namespace omarkhd.Gymk
 {
 	public class DbModel
 	{
-		private SqliteConnection Db; //change this!
+		protected SqliteConnection Db; //change this!
 		protected string TableName;
 		protected string IdName;
 		private IDataReader LastDataReader;
@@ -174,6 +174,21 @@ namespace omarkhd.Gymk
 				cmd.Parameters.Add(p);				
 				cmd.Prepare();
 			}
+		}
+		
+		protected void Begin()
+		{
+			this.DoNonQuery("begin");
+		}
+		
+		protected void Commit()
+		{
+			this.DoNonQuery("commit");
+		}
+		
+		protected void Rollback()
+		{
+			this.DoNonQuery("rollback");
 		}
 	}
 }

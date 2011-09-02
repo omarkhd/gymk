@@ -21,7 +21,6 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
-    <additionalargs>/resource:resources/default_wizard_image.png,default_wizard_image.png /resource:resources/w2.png,w2.png</additionalargs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -61,6 +60,12 @@
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\default_wizard_image.png">
+      <LogicalName>default_wizard_image.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\w2.png">
+      <LogicalName>w2.png</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +110,12 @@
     <Compile Include="models\PaymentModel.cs" />
     <Compile Include="MonthlyCharge.cs" />
     <Compile Include="Payment.cs" />
+    <Compile Include="MembersWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.MembersWindow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="models\" />
+    <Folder Include="resources\" />
   </ItemGroup>
 </Project>

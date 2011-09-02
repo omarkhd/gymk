@@ -24,6 +24,7 @@ namespace omarkhd.Gymk
 			this.PacksAction.Activated += this.LaunchPacks;
 			this.ClientsAction.Activated += this.LaunchClients;
 			this.ConfigAction.Activated += this.LaunchPreferences;
+			this.MembersAction.Activated += this.LaunchMembers;
 		}
 		
 		private void Quit(object sender, object args)
@@ -40,8 +41,6 @@ namespace omarkhd.Gymk
 			{
 				Member m = (Member) o;
 				Client c = m.InnerClient;
-				bool error = false;
-				
 				ClientModel cm = new ClientModel();
 				MemberModel mm = new MemberModel();
 				
@@ -51,7 +50,7 @@ namespace omarkhd.Gymk
 					cm.Insert(c);
 					c.Id = cm.LastInsertId;
 				}
-					
+				
 				//add the contact info
 				if(m.InnerContact.Name.Length > 0)
 				{
@@ -119,6 +118,15 @@ namespace omarkhd.Gymk
 		private void LaunchClients(object sender, EventArgs args)
 		{
 			ClientsWindow w = new ClientsWindow();
+			w.Modal = true;
+			w.TransientFor = this;
+			w.ShowAll();
+		}
+		
+		private void LaunchMembers(object sender, EventArgs args)
+		{
+			MembersWindow w = new MembersWindow();
+			w.Modal = true;
 			w.TransientFor = this;
 			w.ShowAll();
 		}

@@ -94,7 +94,7 @@ namespace omarkhd.Gymk
 		{
 			this.CurrentClient = (Client) this.ClientsNodeView.NodeSelection.SelectedNode;	
 			Client c = this.CurrentClient;
-			this.IdLabel.Text = c.Id.ToString("X4");
+			this.IdLabel.Text = c.Id.ToString("0000");
 			this.NameEntry.Text = c.Name;
 			this.SurnameEntry.Text = c.Surname;
 			this.AddressEntry.Text = c.Address;
