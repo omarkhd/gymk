@@ -72,7 +72,7 @@ namespace omarkhd.Gymk
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.label2 = new global::Gtk.Label ();
 			this.label2.Name = "label2";
-			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Áreas con las que cuenta el gimnasio, estas servirán para la creación de nuevos p" + "aquetes de cobro.");
+			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Áreas con las que cuenta el gimnasio, estas servirán para la creación de nuevos paquetes de cobro.");
 			this.label2.Wrap = true;
 			this.label2.Justify = ((global::Gtk.Justification)(3));
 			this.vbox4.Add (this.label2);

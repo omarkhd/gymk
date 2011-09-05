@@ -5,7 +5,7 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="..\bin\Debug\omarkhd.Gymk.exe" internal="true" />
+    <widget-library name="../bin/Debug/omarkhd.Gymk.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="omarkhd.Gymk.GymkWindow" design-size="451 300">
     <action-group name="Default">
@@ -1741,7 +1741,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="omarkhd.Gymk.MembersWindow" design-size="650 565">
+  <widget class="Gtk.Window" id="omarkhd.Gymk.MembersWindow" design-size="658 613">
     <property name="MemberName" />
     <property name="WidthRequest">650</property>
     <property name="Title" translatable="yes">Miembros</property>
@@ -1788,7 +1788,7 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Entry" id="entry1">
+                      <widget class="Gtk.Entry" id="SearchEntry">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="IsEditable">True</property>
@@ -1852,7 +1852,7 @@
                               <widget class="Gtk.Notebook" id="notebook1">
                                 <property name="MemberName" />
                                 <property name="CanFocus">True</property>
-                                <property name="CurrentPage">2</property>
+                                <property name="CurrentPage">0</property>
                                 <property name="ShowBorder">False</property>
                                 <child>
                                   <widget class="Gtk.VBox" id="vbox9">

@@ -16,7 +16,7 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.Label label1;
 
-		private global::Gtk.Entry entry1;
+		private global::Gtk.Entry SearchEntry;
 
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 
@@ -240,13 +240,13 @@ namespace omarkhd.Gymk
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child hbox11.Gtk.Box+BoxChild
-			this.entry1 = new global::Gtk.Entry ();
-			this.entry1.CanFocus = true;
-			this.entry1.Name = "entry1";
-			this.entry1.IsEditable = true;
-			this.entry1.InvisibleChar = '●';
-			this.hbox11.Add (this.entry1);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox11[this.entry1]));
+			this.SearchEntry = new global::Gtk.Entry ();
+			this.SearchEntry.CanFocus = true;
+			this.SearchEntry.Name = "SearchEntry";
+			this.SearchEntry.IsEditable = true;
+			this.SearchEntry.InvisibleChar = '●';
+			this.hbox11.Add (this.SearchEntry);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox11[this.SearchEntry]));
 			w3.Position = 1;
 			this.vbox5.Add (this.hbox11);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox5[this.hbox11]));
@@ -288,7 +288,7 @@ namespace omarkhd.Gymk
 			this.notebook1 = new global::Gtk.Notebook ();
 			this.notebook1.CanFocus = true;
 			this.notebook1.Name = "notebook1";
-			this.notebook1.CurrentPage = 2;
+			this.notebook1.CurrentPage = 0;
 			this.notebook1.ShowBorder = false;
 			// Container child notebook1.Gtk.Notebook+NotebookChild
 			this.vbox9 = new global::Gtk.VBox ();
@@ -1062,8 +1062,8 @@ namespace omarkhd.Gymk
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 650;
-			this.DefaultHeight = 565;
+			this.DefaultWidth = 658;
+			this.DefaultHeight = 613;
 			this.Show ();
 		}
 	}

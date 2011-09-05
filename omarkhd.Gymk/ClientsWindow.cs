@@ -32,7 +32,7 @@ namespace omarkhd.Gymk
 			this.CleanForm();
 			
 			ClientModel m = new ClientModel();
-			this.FillNodeView(m.GetAllLike(this.SearchEntry.Text));
+			this.FillNodeView(m.GetAllLike(this.SearchEntry.Text.Trim()));
 			this.ClientsNodeView.Sensitive = true;
 		}
 		

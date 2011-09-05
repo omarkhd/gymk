@@ -103,3 +103,6 @@ create table MembershipDebt
 
 create view payment_with_total as
 select p.*, p.Amount - p.Discount as Total from Payment p;
+
+create view member_with_client_info as
+select m.*, c.Name, c.Surname, c.Address, c.PhoneNumber, c.Email from Member m inner join Client c on m.Id = c.Id;

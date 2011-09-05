@@ -1,9 +1,7 @@
 using System;
-using Gtk;
 
 namespace omarkhd.Gymk
 {
-	[TreeNode(ListOnly = true)]
 	public class Member
 	{
 		public Client InnerClient;
@@ -11,7 +9,6 @@ namespace omarkhd.Gymk
 		public DateTime BirthDate;
 		public DateTime JoinDate;
 		
-		[TreeNodeValue(Column = 0)]
 		public long Id;	
 		public int PaymentDay;
 		public byte[] BinImage;
@@ -23,12 +20,6 @@ namespace omarkhd.Gymk
 		
 		public bool ChargeFirstMonth;
 		public bool ChargeMembership;
-		
-		//properties for treenode purposes
-		[TreeNodeValue(Column = 1)]
-		public string Name { get { return this.InnerClient.Name; }}
-		[TreeNodeValue(Column = 2)]
-		public string FullName { get { return this.InnerClient.FullName; }}
 		
 		public Member()
 		{

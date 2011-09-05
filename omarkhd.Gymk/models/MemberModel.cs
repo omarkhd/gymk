@@ -45,13 +45,23 @@ namespace omarkhd.Gymk
 			}				
 		}
 		
-		public IDataReader GetAllLike(object key)
+		/*public IDataReader GetAllLike(object key)
 		{
-			/*string like = "%" + key + "%";
+			string like = "%" + key + "%";
 			string sql = "select * from " + this.TableName;
 			sql += " where Id = @p0 or Name like @p1 or Surname like @p2";
-			return this.DoReader(sql, key, like, like);*/
+			return this.DoReader(sql, key, like, like);
 			return null;
+		}*/
+		
+		public IDataReader GetAllWithJoinLike(object key)
+		{
+			string like = "%" + key + "%";
+			string sql = "select * from member_with_client_info";
+			sql += " where Id = @p0 or Name like @p1 or Surname like @p2";
+			return this.DoReader(sql, key, like, like);
+			/*string sql = "select * from member_with_client_info";
+			return this.DoReader(sql);*/
 		}
 		
 		public static Member FromId(long id)
