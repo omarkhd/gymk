@@ -52,6 +52,7 @@ namespace omarkhd.Gymk
 			this.Gender = m.Gender;
 			this.Pack = m.Pack;
 			this.Active = m.Active;
+			this.InnerContact = m.InnerContact;
 			return true;	
 		}
 	}

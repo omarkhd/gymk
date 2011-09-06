@@ -26,8 +26,10 @@ namespace omarkhd.Gymk
 			this.SinceBox.Add(this.SinceWidget.Box);
 			
 			//configuring some ui elements
-			this.HeightSpin.SetRange(40, 200);
+			/*this.HeightSpin.SetRange(1, 2.5);
 			this.HeightSpin.SetIncrements(0.01, 0.01);
+			this.WeightSpin.SetRange(40, 200);
+			this.WeightSpin.SetIncrements(0.01, 0.01);*/
 			
 			this.GenderCombo.AppendText("Masculino");
 			this.GenderCombo.AppendText("Femenino");
@@ -77,6 +79,29 @@ namespace omarkhd.Gymk
 			this.DoSearch(null, null);
 		}
 		
+		private void ClearForm()
+		{
+			this.WeightSpin.Text = "";
+			this.HeightSpin.Text = "";
+			this.GenderCombo.Active = 0;
+			this.BirthdayWidget.Date = DateTime.Today;
+			this.ContactNameEntry.Text = "";
+			this.ContactPhoneEntry.Text = "";
+			this.PackCombo.Active = 0;
+			this.SinceWidget.Date = DateTime.Today;
+			this.PaymentDaySpin.Text = "";
+			this.NameEntry.Text = "";
+			this.SurnameEntry.Text = "";
+			this.AddressEntry.Text = "";
+			this.PhoneEntry.Text = "";
+			this.EmailEntry.Text = "";
+			
+			Widget[] widgets = this.PhotoButton.Children;
+			foreach(Widget w in widgets)
+				this.PhotoButton.Remove(w);
+			this.PhotoButton.Label = "Click para seleccionar";
+		}
+		
 		private void FillNodeView(IDataReader reader)
 		{
 			NodeStore store = new NodeStore(typeof(Client));
@@ -102,6 +127,7 @@ namespace omarkhd.Gymk
 		
 		private void DoSearch(object sender, EventArgs args)
 		{
+			this.ClearForm();
 			string like = this.SearchEntry.Text.Trim();
 			MemberModel model = new MemberModel();
 			this.FillNodeView(model.GetAllWithJoinLike(like));
@@ -118,6 +144,7 @@ namespace omarkhd.Gymk
 			m.Sync();
 			c = m.InnerClient;			
 			
+			//client info
 			this.IdLabel.Text = c.Id.ToString("0000");
 			this.NameEntry.Text = c.Name;
 			this.SurnameEntry.Text = c.Surname;
@@ -125,13 +152,16 @@ namespace omarkhd.Gymk
 			this.PhoneEntry.Text = c.PhoneNumber;
 			this.EmailEntry.Text = c.Email;
 			
-			//payment info
+			//member info
 			this.WeightSpin.Value = m.Weight;	
 			this.HeightSpin.Value = m.Height;
 			this.GenderCombo.Active = m.Gender == 'm' ? 0 : 1;
 			this.BirthdayWidget.Date = m.BirthDate;
+			this.ContactNameEntry.Text = !string.IsNullOrEmpty(m.InnerContact.Name) ? m.InnerContact.Name : "";
+			this.ContactPhoneEntry.Text = !string.IsNullOrEmpty(m.InnerContact.PhoneNumber) ? m.InnerContact.PhoneNumber : "";
 			
-			Console.Out.WriteLine(m.InnerContact);
+			//payment info
+			
 			
 			//conf
 			this.EditButton.Sensitive = true;

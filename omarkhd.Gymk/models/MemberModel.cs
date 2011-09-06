@@ -81,9 +81,14 @@ namespace omarkhd.Gymk
 				m.PaymentDay = (int) ((long) r["PaymentDay"]);
 				m.JoinDate = (DateTime) r["JoinDate"];
 				m.Pack = (long) r["Pack"];
+				
 				m.InnerClient = new Client();
 				m.InnerClient.Id = id;
-				m.InnerClient.Sync();
+				m.InnerClient.Sync();	
+				
+				m.InnerContact = new Contact();
+				m.InnerContact.Id = long.TryParse(r["Contact"].ToString(), out m.InnerContact.Id) ? m.InnerContact.Id : 0;
+				m.InnerContact.Sync();
 			}
 			
 			return m;

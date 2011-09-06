@@ -367,12 +367,13 @@ namespace omarkhd.Gymk
 			w13.Expand = false;
 			w13.Fill = false;
 			// Container child hbox16.Gtk.Box+BoxChild
-			this.WeightSpin = new global::Gtk.SpinButton (0, 100, 1);
+			this.WeightSpin = new global::Gtk.SpinButton (40, 200, 0.01);
 			this.WeightSpin.CanFocus = true;
 			this.WeightSpin.Name = "WeightSpin";
 			this.WeightSpin.Adjustment.PageIncrement = 10;
 			this.WeightSpin.ClimbRate = 1;
 			this.WeightSpin.Numeric = true;
+			this.WeightSpin.Value = 44;
 			this.hbox16.Add (this.WeightSpin);
 			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox16[this.WeightSpin]));
 			w14.Position = 1;
