@@ -8,7 +8,9 @@ drop table if exists Pack;
 drop table if exists PackArea;
 drop table if exists Payment;
 drop table if exists MonthlyCharge;
+drop table if exists MembershipDebt;
 drop view if exists payment_with_total;
+drop view if exists member_with_client_info;
 
 create table Client
 (
@@ -16,7 +18,7 @@ create table Client
 	Name varchar(50) not null,
 	Surname varchar(50) not null,
 	Address varchar(100),
-	PhoneNumber numeric(13),
+	PhoneNumber varchar(13),
 	Email varchar(50),
 	-- constraint Client_pk primary key(Id),
 	constraint Client_uq1 unique(Name, Surname)
@@ -26,7 +28,7 @@ create table Contact
 (
 	Id integer not null,
 	Name varchar(100) not null,
-	PhoneNumber numeric(13) not null,
+	PhoneNumber varchar(13) not null,
 	constraint Contact_pk primary key(Id)
 );
 

@@ -67,6 +67,21 @@ namespace omarkhd.Gymk
 			return (long) this.DoNonQuery(sql, key);
 		}
 		
+		public bool UpdateById(object id, string column_name, object update)
+		{
+			/*string sql = "update " + this.TableName + " set " + column_name;
+			sql += " = @p0 where " + this.IdName + " = @p1";
+			return ((long) this.DoNonQuery(sql, update, id)) > 0;*/
+			return this.UpdateBy(this.IdName, id, column_name, update);
+		}
+		
+		public bool UpdateBy(string column_criteria, object criteria, string column_name, object update)
+		{
+			string sql = "update " + this.TableName + " set " + column_name;
+			sql += " = @p0 where " + column_criteria + " = @p1";
+			return ((long) this.DoNonQuery(sql, update, criteria)) > 0;
+		}
+		
 		public bool ExistsById(object key)
 		{
 			string sql = "select count(*) from " + this.TableName;

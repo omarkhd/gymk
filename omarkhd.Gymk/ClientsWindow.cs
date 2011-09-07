@@ -80,8 +80,7 @@ namespace omarkhd.Gymk
 				c.Name = (string) reader["Name"];
 				c.Surname = (string) reader["Surname"];	
 				c.Address = (string) reader["Address"];
-				decimal pn = (decimal) reader["PhoneNumber"];
-				c.PhoneNumber = (pn == 0 ? "" : pn.ToString());
+				c.PhoneNumber = (string) reader["PhoneNumber"];
 				c.Email = (string) reader["Email"];
 				store.AddNode(c);
 			}

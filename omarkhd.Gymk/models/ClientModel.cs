@@ -44,6 +44,11 @@ namespace omarkhd.Gymk
 			return this.DoNonQuery(sql, c.Name, c.Surname, c.Address, c.PhoneNumber, c.Email, c.Id) > 0;
 		}
 		
+		public bool Update(Client c, string attr, object update)
+		{
+			return this.UpdateById(c.Id, attr, update);
+		}
+		
 		public bool IsMember(Client c)
 		{
 			string sql = "select count(*) from Member where Id = @p0";

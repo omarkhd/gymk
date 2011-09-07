@@ -24,6 +24,16 @@ namespace omarkhd.Gymk
 			return i_success;
 		}
 		
+		public bool Update(Member m)
+		{
+			return false;
+		}
+		
+		public bool Update(Member m, string attr, object key)
+		{
+			return this.UpdateById(m.Id, attr, key);
+		}
+		
 		public void SetImage(Member m)
 		{
 			string sql = "update " + this.TableName + " set Photo = @p0 where Id = @p1";
@@ -43,6 +53,25 @@ namespace omarkhd.Gymk
 				AppHelper.Log(cmd.CommandText);
 				cmd.ExecuteNonQuery();
 			}				
+		}
+		
+		public byte[] GetImage(Member m)
+		{
+			SqliteCommand cmd = this.Db.CreateCommand();
+			cmd.CommandText = "select Photo from Member where Id = " + m.Id;
+			IDataReader r = cmd.ExecuteReader();
+			byte[] bytes = new byte[0];
+			if(r.Read())
+			{
+				long length = r.GetBytes(0, 0, null, 0, 0);
+				if(length > 0)
+				{
+					bytes = new byte[length];
+					r.GetBytes(0, 0, bytes, 0, bytes.Length);
+				}
+			}
+			
+			return bytes;
 		}
 		
 		/*public IDataReader GetAllLike(object key)
@@ -72,6 +101,7 @@ namespace omarkhd.Gymk
 			if(r.Read())
 			{
 				m = new Member();
+				m.Id = id;
 				m.Active = (bool) r["Active"];
 				m.Height = (float) r["Height"];
 				m.Weight = (float) r["Weight"];
@@ -81,6 +111,7 @@ namespace omarkhd.Gymk
 				m.PaymentDay = (int) ((long) r["PaymentDay"]);
 				m.JoinDate = (DateTime) r["JoinDate"];
 				m.Pack = (long) r["Pack"];
+				m.BinImage = mm.GetImage(m);
 				
 				m.InnerClient = new Client();
 				m.InnerClient.Id = id;

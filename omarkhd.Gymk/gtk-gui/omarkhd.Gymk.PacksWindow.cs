@@ -90,7 +90,7 @@ namespace omarkhd.Gymk
 			this.label4 = new global::Gtk.Label ();
 			this.label4.WidthRequest = 290;
 			this.label4.Name = "label4";
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("Paquetes que se usarán en la inscripción de miembros al gimnasio, por ejemplo: estudiantes, tercera edad, general, etc.");
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("Paquetes que se usarán en la inscripción de miembros al gimnasio, por ejemplo: es" + "tudiantes, tercera edad, general, etc.");
 			this.label4.Wrap = true;
 			this.vbox6.Add (this.label4);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox6[this.label4]));

@@ -53,6 +53,7 @@ namespace omarkhd.Gymk
 			this.Pack = m.Pack;
 			this.Active = m.Active;
 			this.InnerContact = m.InnerContact;
+			this.BinImage = m.BinImage;
 			return true;	
 		}
 	}
