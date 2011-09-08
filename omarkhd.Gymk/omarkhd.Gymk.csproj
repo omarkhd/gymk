@@ -112,6 +112,7 @@
     <Compile Include="Payment.cs" />
     <Compile Include="MembersWindow.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.MembersWindow.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.LoginWindow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

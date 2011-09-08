@@ -11,6 +11,9 @@ namespace omarkhd.Gymk
 			AppHelper.Init();
 			Application.Init();
 			
+			//LoginDialog ld = new LoginDialog();
+			//ld.Run();
+			
 			Window w = new GymkWindow();
 			w.ShowAll();			
 			

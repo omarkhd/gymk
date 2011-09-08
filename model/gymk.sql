@@ -9,6 +9,7 @@ drop table if exists PackArea;
 drop table if exists Payment;
 drop table if exists MonthlyCharge;
 drop table if exists MembershipDebt;
+drop table if exists User;
 drop view if exists payment_with_total;
 drop view if exists member_with_client_info;
 
@@ -101,6 +102,15 @@ create table MembershipDebt
 	constraint MembershipDebt_pk primary key(Member),
 	constraint MembershipDebt_fk foreign key(Member) references Member(Id),
 	constraint MembershipDebt_fk2 foreign key(Payment) references Payment(Id)
+);
+
+create table User
+(
+	Id integer not null,
+	Alias varchar(45) not null,
+	Password varchar(32),
+	Admin boolean not null,
+	Active boolean not null
 );
 
 create view payment_with_total as
