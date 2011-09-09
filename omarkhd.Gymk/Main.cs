@@ -11,13 +11,16 @@ namespace omarkhd.Gymk
 			AppHelper.Init();
 			Application.Init();
 			
-			//LoginDialog ld = new LoginDialog();
-			//ld.Run();
+			LoginDialog login = new LoginDialog();
+			login.Run();
 			
-			Window w = new GymkWindow();
-			w.ShowAll();			
+			if(login.Success)
+			{				
+				Window w = new GymkWindow();
+				w.ShowAll();			
+				Application.Run();
+			}
 			
-			Application.Run();
 			AppHelper.Clean();
 		}
 	}
