@@ -56,7 +56,7 @@ namespace omarkhd.Gymk
 		{
 			global::Stetic.Gui.Initialize (this);
 			// Widget omarkhd.Gymk.LoginDialog
-			this.HeightRequest = 270;
+			this.HeightRequest = 285;
 			this.Name = "omarkhd.Gymk.LoginDialog";
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.Resizable = false;
@@ -80,6 +80,7 @@ namespace omarkhd.Gymk
 			// Container child vbox2.Gtk.Box+BoxChild
 			this.frame1 = new global::Gtk.Frame ();
 			this.frame1.Name = "frame1";
+			this.frame1.BorderWidth = ((uint)(6));
 			// Container child frame1.Gtk.Container+ContainerChild
 			this.GtkAlignment = new global::Gtk.Alignment (0f, 0f, 1f, 1f);
 			this.GtkAlignment.Name = "GtkAlignment";
@@ -88,6 +89,7 @@ namespace omarkhd.Gymk
 			this.vbox3 = new global::Gtk.VBox ();
 			this.vbox3.Name = "vbox3";
 			this.vbox3.Spacing = 6;
+			this.vbox3.BorderWidth = ((uint)(6));
 			// Container child vbox3.Gtk.Box+BoxChild
 			this.fixed3 = new global::Gtk.Fixed ();
 			this.fixed3.Name = "fixed3";
@@ -139,7 +141,6 @@ namespace omarkhd.Gymk
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.label2 = new global::Gtk.Label ();
 			this.label2.WidthRequest = 70;
-			this.label2.Name = "label2";
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Usuario");
 			this.label2.Wrap = true;
 			this.hbox1.Add (this.label2);
@@ -206,6 +207,7 @@ namespace omarkhd.Gymk
 			// Container child vbox6.Gtk.Box+BoxChild
 			this.InfoLabel = new global::Gtk.Label ();
 			this.InfoLabel.Name = "InfoLabel";
+			this.InfoLabel.LabelProp = "";
 			this.vbox6.Add (this.InfoLabel);
 			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vbox6[this.InfoLabel]));
 			w14.Position = 1;
@@ -274,8 +276,8 @@ namespace omarkhd.Gymk
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 264;
-			this.DefaultHeight = 296;
+			this.DefaultWidth = 288;
+			this.DefaultHeight = 285;
 			this.Show ();
 		}
 	}

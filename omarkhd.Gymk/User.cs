@@ -1,9 +1,13 @@
 using System;
+using Gtk;
+
 namespace omarkhd.Gymk
 {
-	public class User
+	[TreeNode(ListOnly = true)]
+	public class User : Gtk.TreeNode
 	{
 		public long Id;
+		[TreeNodeValue(Column = 0)]
 		public string Alias;
 		public string Password;
 		public string Name;

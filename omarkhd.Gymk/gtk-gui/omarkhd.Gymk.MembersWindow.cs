@@ -660,7 +660,6 @@ namespace omarkhd.Gymk
 			w47.MenuLabel = "";
 			// Notebook tab
 			this.label2 = new global::Gtk.Label ();
-			this.label2.Name = "label2";
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>General</b>");
 			this.label2.UseMarkup = true;
 			this.notebook1.SetTabLabel (this.vbox9, this.label2);

@@ -70,8 +70,8 @@ namespace omarkhd.Gymk
 			this.EditarAction = new global::Gtk.Action ("EditarAction", global::Mono.Unix.Catalog.GetString ("Editar"), null, null);
 			this.EditarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Editar");
 			w1.Add (this.EditarAction, null);
-			this.ConfigAction = new global::Gtk.Action ("ConfigAction", global::Mono.Unix.Catalog.GetString ("Configuración"), null, "gtk-preferences");
-			this.ConfigAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Configuración");
+			this.ConfigAction = new global::Gtk.Action ("ConfigAction", global::Mono.Unix.Catalog.GetString ("Preferencias"), null, "gtk-preferences");
+			this.ConfigAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Preferencias");
 			w1.Add (this.ConfigAction, null);
 			this.CatlogosAction = new global::Gtk.Action ("CatlogosAction", global::Mono.Unix.Catalog.GetString ("Catálogos"), null, null);
 			this.CatlogosAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Catálogos");
@@ -102,12 +102,13 @@ namespace omarkhd.Gymk
 			this.Name = "omarkhd.Gymk.GymkWindow";
 			this.Title = "";
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.DefaultWidth = 500;
 			// Container child omarkhd.Gymk.GymkWindow.Gtk.Container+ContainerChild
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString ("<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
+			this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
 			this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 			this.menubar2.Name = "menubar2";
 			this.vbox2.Add (this.menubar2);
@@ -146,7 +147,6 @@ namespace omarkhd.Gymk
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 451;
 			this.DefaultHeight = 278;
 			this.Show ();
 		}

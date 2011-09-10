@@ -81,7 +81,9 @@ create table Payment
 	PaymentDate date not null,
 	Amount real not null,
 	Discount real not null,
-	constraint Payment_pk primary key(Id)
+	User integer,
+	constraint Payment_pk primary key(Id),
+	constraint Payment_fk foreign key(User) references User(Id)
 );
 
 create table MonthlyCharge
@@ -108,8 +110,8 @@ create table User
 (
 	Id integer not null,
 	Alias varchar(45) not null,
-	Password varchar(32),
-	Name varchar(100),
+	Password varchar(32) not null,
+	Name varchar(100) not null,
 	Admin boolean not null,
 	Active boolean not null,
 	constraint User_pk primary key(Id),
