@@ -10,6 +10,8 @@ namespace omarkhd.Gymk
 			this.Build ();
 			this.Connect();
 			this.Title = "omarkhd's GymK";
+			SessionRegistry r = SessionRegistry.GetInstance();
+			this.UserStatusLabel.Text = (string) r["user_name"] + ((bool) r["user_is_admin"] ? " [Administrador]" : "");
 		}
 		
 		private void Connect()

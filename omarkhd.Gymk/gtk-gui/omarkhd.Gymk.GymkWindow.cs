@@ -40,6 +40,12 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.MenuBar menubar2;
 
+		private global::Gtk.VBox vbox7;
+
+		private global::Gtk.Statusbar statusbar1;
+
+		private global::Gtk.Label UserStatusLabel;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -101,7 +107,7 @@ namespace omarkhd.Gymk
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
+			this.UIManager.AddUiFromString ("<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
 			this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 			this.menubar2.Name = "menubar2";
 			this.vbox2.Add (this.menubar2);
@@ -109,12 +115,39 @@ namespace omarkhd.Gymk
 			w2.Position = 0;
 			w2.Expand = false;
 			w2.Fill = false;
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.vbox7 = new global::Gtk.VBox ();
+			this.vbox7.Name = "vbox7";
+			this.vbox7.Spacing = 6;
+			// Container child vbox7.Gtk.Box+BoxChild
+			this.statusbar1 = new global::Gtk.Statusbar ();
+			this.statusbar1.Name = "statusbar1";
+			this.statusbar1.Spacing = 6;
+			// Container child statusbar1.Gtk.Box+BoxChild
+			this.UserStatusLabel = new global::Gtk.Label ();
+			this.UserStatusLabel.Name = "UserStatusLabel";
+			this.UserStatusLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("label5");
+			this.statusbar1.Add (this.UserStatusLabel);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.statusbar1[this.UserStatusLabel]));
+			w3.Position = 1;
+			w3.Expand = false;
+			w3.Fill = false;
+			this.vbox7.Add (this.statusbar1);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox7[this.statusbar1]));
+			w4.Position = 0;
+			w4.Expand = false;
+			w4.Fill = false;
+			this.vbox2.Add (this.vbox7);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.vbox7]));
+			w5.Position = 2;
+			w5.Expand = false;
+			w5.Fill = false;
 			this.Add (this.vbox2);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.DefaultWidth = 451;
-			this.DefaultHeight = 300;
+			this.DefaultHeight = 278;
 			this.Show ();
 		}
 	}

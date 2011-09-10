@@ -109,8 +109,11 @@ create table User
 	Id integer not null,
 	Alias varchar(45) not null,
 	Password varchar(32),
+	Name varchar(100),
 	Admin boolean not null,
-	Active boolean not null
+	Active boolean not null,
+	constraint User_pk primary key(Id),
+	constraint User_uq unique(Alias)
 );
 
 create view payment_with_total as

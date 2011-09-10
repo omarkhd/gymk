@@ -73,6 +73,7 @@ namespace omarkhd.Gymk
 			r["author_contact"] = "omarkhd.mx@gmail.com";			
 			r["db_path"] = "data/gymk.db";
 			r["gym_name"] = "Géminis";
+			r["app_name"] = "Gymk";
 		}
 	}
 }

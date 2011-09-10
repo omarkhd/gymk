@@ -89,6 +89,13 @@ namespace omarkhd.Gymk
 			return ((long) this.DoScalar(sql, key)) > 0;
 		}
 		
+		public bool ExistsBy(string column, object key)
+		{
+			string sql = "select count(*) from " + this.TableName;
+			sql += " where " + column + " = @p0";
+			return ((long) this.DoScalar(sql, key)) > 0;	
+		}
+		
 		public bool Insert(params object[] p)
 		{
 			string sql = "insert into " + this.TableName + " values(";
