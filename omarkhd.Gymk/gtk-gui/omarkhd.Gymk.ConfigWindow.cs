@@ -163,6 +163,7 @@ namespace omarkhd.Gymk
 			w7.Position = 1;
 			// Notebook tab
 			this.label2 = new global::Gtk.Label ();
+			this.label2.Name = "label2";
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Pagos");
 			this.notebook1.SetTabLabel (this.vbox3, this.label2);
 			this.label2.ShowAll ();

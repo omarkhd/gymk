@@ -40,11 +40,15 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.MenuBar menubar2;
 
+		private global::Gtk.HBox hbox1;
+
+		private global::Gtk.VBox vbox3;
+
+		private global::Gtk.Image HeaderImage;
+
 		private global::Gtk.VBox vbox7;
 
-		private global::Gtk.Statusbar statusbar1;
-
-		private global::Gtk.Label UserStatusLabel;
+		private global::Gtk.Statusbar StatusInfo;
 
 		protected virtual void Build ()
 		{
@@ -99,16 +103,19 @@ namespace omarkhd.Gymk
 			w1.Add (this.infoAction, null);
 			this.UIManager.InsertActionGroup (w1, 0);
 			this.AddAccelGroup (this.UIManager.AccelGroup);
+			this.WidthRequest = 600;
+			this.HeightRequest = 400;
 			this.Name = "omarkhd.Gymk.GymkWindow";
 			this.Title = "";
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.Resizable = false;
 			this.DefaultWidth = 500;
 			// Container child omarkhd.Gymk.GymkWindow.Gtk.Container+ContainerChild
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
+			this.UIManager.AddUiFromString ("<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
 			this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 			this.menubar2.Name = "menubar2";
 			this.vbox2.Add (this.menubar2);
@@ -117,37 +124,54 @@ namespace omarkhd.Gymk
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
+			this.hbox1 = new global::Gtk.HBox ();
+			this.hbox1.Name = "hbox1";
+			this.hbox1.Spacing = 6;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.vbox3 = new global::Gtk.VBox ();
+			this.vbox3.Name = "vbox3";
+			this.vbox3.Spacing = 6;
+			// Container child vbox3.Gtk.Box+BoxChild
+			this.HeaderImage = new global::Gtk.Image ();
+			this.HeaderImage.WidthRequest = 600;
+			this.HeaderImage.HeightRequest = 100;
+			this.HeaderImage.Name = "HeaderImage";
+			this.vbox3.Add (this.HeaderImage);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.HeaderImage]));
+			w3.Position = 0;
+			w3.Expand = false;
+			w3.Fill = false;
+			this.hbox1.Add (this.vbox3);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.vbox3]));
+			w4.Position = 0;
+			w4.Expand = false;
+			w4.Fill = false;
+			this.vbox2.Add (this.hbox1);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.hbox1]));
+			w5.Position = 1;
+			// Container child vbox2.Gtk.Box+BoxChild
 			this.vbox7 = new global::Gtk.VBox ();
 			this.vbox7.Name = "vbox7";
 			this.vbox7.Spacing = 6;
 			// Container child vbox7.Gtk.Box+BoxChild
-			this.statusbar1 = new global::Gtk.Statusbar ();
-			this.statusbar1.Name = "statusbar1";
-			this.statusbar1.Spacing = 6;
-			// Container child statusbar1.Gtk.Box+BoxChild
-			this.UserStatusLabel = new global::Gtk.Label ();
-			this.UserStatusLabel.Name = "UserStatusLabel";
-			this.UserStatusLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("label5");
-			this.statusbar1.Add (this.UserStatusLabel);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.statusbar1[this.UserStatusLabel]));
-			w3.Position = 1;
-			w3.Expand = false;
-			w3.Fill = false;
-			this.vbox7.Add (this.statusbar1);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox7[this.statusbar1]));
-			w4.Position = 0;
-			w4.Expand = false;
-			w4.Fill = false;
+			this.StatusInfo = new global::Gtk.Statusbar ();
+			this.StatusInfo.Name = "StatusInfo";
+			this.StatusInfo.Spacing = 6;
+			this.vbox7.Add (this.StatusInfo);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox7[this.StatusInfo]));
+			w6.Position = 0;
+			w6.Expand = false;
+			w6.Fill = false;
 			this.vbox2.Add (this.vbox7);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.vbox7]));
-			w5.Position = 2;
-			w5.Expand = false;
-			w5.Fill = false;
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox2[this.vbox7]));
+			w7.Position = 2;
+			w7.Expand = false;
+			w7.Fill = false;
 			this.Add (this.vbox2);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultHeight = 278;
+			this.DefaultHeight = 426;
 			this.Show ();
 		}
 	}

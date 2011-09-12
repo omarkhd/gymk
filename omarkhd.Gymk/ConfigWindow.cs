@@ -5,6 +5,12 @@ namespace omarkhd.Gymk
 {
 	public partial class ConfigWindow : Gtk.Window
 	{
+		private User CurrentUser;
+		private CrudState CrudOp;
+		private string OldPassword;
+		private string NewPassword;
+		private bool ChangePassword;
+		
 		public ConfigWindow() : base(Gtk.WindowType.Toplevel)
 		{
 			this.Build();
@@ -17,6 +23,7 @@ namespace omarkhd.Gymk
 		private void Init()
 		{
 			this.InitUsers();
+			this.CrudOp = CrudState.None;
 		}
 		
 		private void InitUsers()
@@ -32,9 +39,22 @@ namespace omarkhd.Gymk
 			this.PasswordButton.Sensitive = false;
 			this.AccessButton.Sensitive = false;
 			this.NameEntry.Sensitive = false;
-			this.AddButton.Sensitive = true;
+			this.NewPassword = "";
+			this.OldPassword = "";
 			
+			SessionRegistry r = SessionRegistry.GetInstance();
+			this.AddButton.Sensitive = (bool) r["user_is_admin"];
+			
+			this.CleanUserForm();
 			this.FillNodeView();
+		}
+		
+		private void CleanUserForm()
+		{
+			this.AliasEntry.Text = "";
+			this.AdminCheckBox.Active = false;
+			this.ActiveCheckBox.Active = false;
+			this.NameEntry.Text = "";
 		}
 		
 		private void Connect()
@@ -43,6 +63,9 @@ namespace omarkhd.Gymk
 			this.AddButton.Clicked += this.DoAdd;
 			this.CancelButton.Clicked += this.DoCancel;
 			this.OkButton.Clicked += this.DoOk;
+			this.UsersNodeView.CursorChanged += this.SelectCurrent;
+			this.EditButton.Clicked += this.DoEdit;
+			this.PasswordButton.Clicked += DoChangePassword;
 		}
 		
 		private void CustomBuild()
@@ -90,7 +113,7 @@ namespace omarkhd.Gymk
 			this.UsersNodeView.ShowAll();
 		}
 		
-		private void DoAdd(object sender, EventArgs args)
+		private void UsersEditMode()
 		{
 			this.AdminCheckBox.Sensitive = true;
 			this.ActiveCheckBox.Sensitive = true;
@@ -100,25 +123,155 @@ namespace omarkhd.Gymk
 			this.AddButton.Sensitive = false;
 			this.OkButton.Sensitive = true;
 			this.CancelButton.Sensitive = true;
+			this.EditButton.Sensitive = false;
+			this.UsersNodeView.Sensitive = false;
+			this.OldPassword = "";
+			this.NewPassword = "";
+		}
+		
+		private void DoAdd(object sender, EventArgs args)
+		{
+			this.CleanUserForm();
+			this.UsersEditMode();
+			this.CrudOp = CrudState.Create;
 		}
 		
 		private void DoCancel(object sender, EventArgs args)
 		{
 			this.InitUsers();	
+			this.CrudOp = CrudState.None;
 		}		
 		
 		private void DoOk(object sender, EventArgs args)
 		{
-			User user = new User();
-			user.Active = this.ActiveCheckBox.Active;
-			user.Admin = this.AdminCheckBox.Active;
-			user.Alias = this.AliasEntry.Text.Trim();
-			user.Name = this.NameEntry.Text.Trim();
-			string password_string = "fija";
-			user.Password = HashHelper.GetMd5Of(password_string);
-			
 			UserModel model = new UserModel();
-			model.Insert(user);
+			
+			if(this.CrudOp == CrudState.Create)
+			{
+				User user = new User();
+				user.Active = this.ActiveCheckBox.Active;
+				user.Admin = this.AdminCheckBox.Active;
+				user.Alias = this.AliasEntry.Text.Trim();
+				user.Name = this.NameEntry.Text.Trim();
+				user.Password = HashHelper.GetMd5Of(this.NewPassword);
+				
+				if(model.Insert(user))
+				{
+					this.CurrentUser = user;
+					this.CurrentUser.Id = model.LastInsertId;
+				}
+			}
+			
+			else if(this.CrudOp == CrudState.Update)
+			{
+				User u = this.CurrentUser;
+				User to = new User();
+				to.Alias = this.AliasEntry.Text;
+				to.Active = this.ActiveCheckBox.Active;
+				to.Admin = this.AdminCheckBox.Active;
+				to.Name = this.NameEntry.Text;
+				
+				if(to.Admin != u.Admin)
+					model.UpdateById(u.Id, "Admin", to.Admin);
+				if(to.Active != u.Active)
+					model.UpdateById(u.Id, "Active", to.Active);
+				if(to.Alias != u.Alias)
+					model.UpdateById(u.Id, "Alias", to.Alias);
+				if(to.Name != u.Name)
+					model.UpdateById(u.Id, "Name", to.Name);
+				
+				if(this.ChangePassword)
+				{
+					SessionRegistry r = SessionRegistry.GetInstance();
+					long sess_id = (long) r["user_id"];
+					bool can_change = false;
+				
+					if(sess_id != u.Id)
+						can_change = true;
+					else
+					{
+						string old_md5 = HashHelper.GetMd5Of(this.OldPassword);
+						if(old_md5 == u.Password)
+							can_change = true;						
+					}
+					
+					if(can_change)
+					{
+						string new_md5 = HashHelper.GetMd5Of(this.NewPassword);
+						if(new_md5 != u.Password)
+							model.UpdateById(u.Id, "Password", new_md5);
+					}
+					
+					else
+						GuiHelper.ShowMessage(this, "No se pudo cambiar la contraseña");
+				}
+			}
+			
+			this.InitUsers();
+			this.SelectUser(this.CurrentUser);
+		}
+		
+		private void SelectCurrent(object sender, EventArgs args)
+		{
+			SessionRegistry r = SessionRegistry.GetInstance();
+			if(((bool) r["user_is_admin"]))
+				this.EditButton.Sensitive = true;
+				
+			User user = (User) this.UsersNodeView.NodeSelection.SelectedNode;
+			this.CurrentUser = user;
+			this.AdminCheckBox.Active = user.Admin;
+			this.ActiveCheckBox.Active = user.Active;
+			this.AliasEntry.Text = user.Alias;
+			this.NameEntry.Text = user.Name;
+		}
+		
+		private void DoEdit(object sender, EventArgs args)
+		{
+			this.ChangePassword = false;
+			this.CrudOp = CrudState.Update;
+			this.UsersEditMode();
+		}
+		
+		private void SelectUser(User u)
+		{
+			NodeStore store = this.UsersNodeView.NodeStore;
+			TreeNode node = null;
+			bool found = false;
+			
+			for(int i = 0; ; i++)
+			{
+				TreePath path = new TreePath(i.ToString());
+				node = (TreeNode) store.GetNode(path);
+				User temp = (User) node;
+				
+				if(temp == null)
+					break;
+					
+				else if(temp.Id == u.Id)
+				{
+					found = true;
+					break;
+				}
+			}
+						
+			if(found)
+			{
+				this.UsersNodeView.NodeSelection.SelectNode(node);
+				this.UsersNodeView.HasFocus = true;
+			}
+		}
+		
+		private void DoChangePassword(object sender, EventArgs args)
+		{
+			this.ChangePassword = false;
+			
+			SessionRegistry r = SessionRegistry.GetInstance();
+			bool is_self = ((long) r["user_id"]) == this.CurrentUser.Id;
+			NewPasswordDialog dlg = new NewPasswordDialog(is_self);
+			this.ChangePassword = ((Gtk.ResponseType) dlg.Run()) == ResponseType.Ok;
+			
+			this.OldPassword = dlg.Old;
+			this.NewPassword = dlg.New;
 		}
 	}
 }

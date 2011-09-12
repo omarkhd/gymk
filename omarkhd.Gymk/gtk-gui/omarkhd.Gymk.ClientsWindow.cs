@@ -136,6 +136,7 @@ namespace omarkhd.Gymk
 			this.hbox8.Spacing = 6;
 			// Container child hbox8.Gtk.Box+BoxChild
 			this.label2 = new global::Gtk.Label ();
+			this.label2.Name = "label2";
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("/");
 			this.hbox8.Add (this.label2);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox8[this.label2]));

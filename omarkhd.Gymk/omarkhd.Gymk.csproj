@@ -80,6 +80,9 @@
     <EmbeddedResource Include="resources\opt_users.png">
       <LogicalName>opt_users.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="resources\header.png">
+      <LogicalName>header.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -130,6 +133,8 @@
     <Compile Include="models\UserModel.cs" />
     <Compile Include="User.cs" />
     <Compile Include="HashHelper.cs" />
+    <Compile Include="NewPasswordDialog.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.NewPasswordDialog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

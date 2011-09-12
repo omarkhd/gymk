@@ -18,6 +18,20 @@ namespace omarkhd.Gymk
 		{
 			
 		}
+		
+		public bool Sync()
+		{
+			User user = UserModel.FromId(this.Id);
+			if(user == null)
+				return false;
+				
+			this.Alias = user.Alias;
+			this.Password = user.Password;
+			this.Name = user.Name;
+			this.Admin = user.Admin;
+			this.Active = user.Active;
+			return true;
+		}
 	}
 }
 

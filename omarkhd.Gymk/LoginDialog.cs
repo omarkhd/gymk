@@ -57,11 +57,9 @@ namespace omarkhd.Gymk
 		
 		private void DoLogin(object sender, EventArgs args)
 		{
-			if(++this.Hits == this.MaxHits)
-				this.Respond(Gtk.ResponseType.Cancel);
-				
+			this.Hits++;
 			string user = this.UserEntry.Text;
-			string pass = this.PasswordEntry.Text;
+			string pass = HashHelper.GetMd5Of(this.PasswordEntry.Text);
 			User login = this.LoginUser;
 			
 			if(login != null && login.Active && login.Password == pass)
@@ -80,6 +78,9 @@ namespace omarkhd.Gymk
 				this.Respond(Gtk.ResponseType.Ok);
 			else
 				this.SetLabel(string.Format("Login inválido, quedan {0} intentos", this.MaxHits - this.Hits), true);
+				
+			if(this.Hits == this.MaxHits)
+				this.Respond(Gtk.ResponseType.Cancel);
 		}
 		
 		private void LoadInfo(object sender, EventArgs args)

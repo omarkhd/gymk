@@ -21,6 +21,24 @@ namespace omarkhd.Gymk
 		{
 			return this.Insert(null, user.Alias, user.Password, user.Name, user.Admin, user.Active);
 		}
+		
+		public static User FromId(long id)
+		{
+			UserModel model = new UserModel();
+			User user = null;
+			System.Data.IDataReader reader = model.GetById(id);
+			if(reader.Read())
+			{
+				user.Id = id;
+				user.Name = (string) reader["Name"];
+				user.Alias = (string) reader["Alias"];	
+				user.Password = (string) reader["Password"];
+				user.Active = (bool) reader["Active"];
+				user.Admin = (bool) reader["Admin"];
+			}
+			
+			return user;
+		}
 	}
 }
 

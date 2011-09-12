@@ -9,9 +9,18 @@ namespace omarkhd.Gymk
 		{
 			this.Build ();
 			this.Connect();
+			this.CustomBuild();
+		}
+		
+		private void CustomBuild()
+		{
 			this.Title = "omarkhd's GymK";
+			
+			this.HeaderImage.Pixbuf = new Gdk.Pixbuf(null, "header.png");
+			
 			SessionRegistry r = SessionRegistry.GetInstance();
-			this.UserStatusLabel.Text = (string) r["user_name"] + ((bool) r["user_is_admin"] ? " [Administrador]" : "");
+			string msg = (string) r["user_name"] + ((bool) r["user_is_admin"] ? " [Administrador]" : "");
+			this.StatusInfo.Push(0, msg);
 		}
 		
 		private void Connect()

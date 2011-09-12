@@ -141,6 +141,7 @@ namespace omarkhd.Gymk
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.label2 = new global::Gtk.Label ();
 			this.label2.WidthRequest = 70;
+			this.label2.Name = "label2";
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Usuario");
 			this.label2.Wrap = true;
 			this.hbox1.Add (this.label2);
@@ -207,7 +208,6 @@ namespace omarkhd.Gymk
 			// Container child vbox6.Gtk.Box+BoxChild
 			this.InfoLabel = new global::Gtk.Label ();
 			this.InfoLabel.Name = "InfoLabel";
-			this.InfoLabel.LabelProp = "";
 			this.vbox6.Add (this.InfoLabel);
 			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vbox6[this.InfoLabel]));
 			w14.Position = 1;
@@ -277,7 +277,7 @@ namespace omarkhd.Gymk
 				this.Child.ShowAll ();
 			}
 			this.DefaultWidth = 288;
-			this.DefaultHeight = 285;
+			this.DefaultHeight = 311;
 			this.Show ();
 		}
 	}
