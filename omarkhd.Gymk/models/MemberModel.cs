@@ -59,16 +59,22 @@ namespace omarkhd.Gymk
 		{
 			SqliteCommand cmd = this.Db.CreateCommand();
 			cmd.CommandText = "select Photo from Member where Id = " + m.Id;
+			AppHelper.Log(cmd.CommandText);
 			IDataReader r = cmd.ExecuteReader();
 			byte[] bytes = new byte[0];
 			if(r.Read())
 			{
-				long length = r.GetBytes(0, 0, null, 0, 0);
-				if(length > 0)
+				try
 				{
-					bytes = new byte[length];
-					r.GetBytes(0, 0, bytes, 0, bytes.Length);
+					long length = r.GetBytes(0, 0, null, 0, 0);
+					if(length > 0)
+					{
+						bytes = new byte[length];
+						r.GetBytes(0, (long) 0, bytes, 0, bytes.Length);
+					}
 				}
+				
+				catch(Exception) {}
 			}
 			
 			return bytes;

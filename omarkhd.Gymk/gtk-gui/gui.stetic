@@ -100,7 +100,6 @@
     <child>
       <widget class="Gtk.VBox" id="vbox2">
         <property name="MemberName" />
-        <property name="Spacing">6</property>
         <child>
           <widget class="Gtk.MenuBar" id="menubar2">
             <property name="MemberName" />
@@ -3430,7 +3429,6 @@
     <child internal-child="VBox">
       <widget class="Gtk.VBox" id="dialog1_VBox">
         <property name="MemberName" />
-        <property name="BorderWidth">2</property>
         <child>
           <widget class="Gtk.VBox" id="vbox2">
             <property name="MemberName" />
