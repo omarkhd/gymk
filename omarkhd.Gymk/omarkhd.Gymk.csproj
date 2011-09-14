@@ -135,6 +135,7 @@
     <Compile Include="HashHelper.cs" />
     <Compile Include="NewPasswordDialog.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.NewPasswordDialog.cs" />
+    <Compile Include="models\DbRegister.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

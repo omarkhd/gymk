@@ -22,6 +22,9 @@ namespace omarkhd.Gymk
 		
 		private void Init()
 		{
+			this.InitGral();
+			this.InitPayment();
+			
 			this.InitUsers();
 			this.CrudOp = CrudState.None;
 		}
@@ -49,6 +52,27 @@ namespace omarkhd.Gymk
 			this.FillNodeView();
 		}
 		
+		private void InitGral()
+		{
+			DbRegister register = DbRegister.GetInstance();
+			
+			this.GymNameEntry.Text = (string) register["gym_name"];
+			this.GymAddressEntry.Text = (string) register["gym_address"];
+			this.GymPhoneEntry.Text = (string) register["gym_phone"];
+			this.OwnerNameEntry.Text = (string) register["owner_name"];
+			this.OwnerPhoneEntry.Text = (string) register["owner_phone"];
+			this.OwnerEmailEntry.Text = (string) register["owner_email"];
+		}
+		
+		private void InitPayment()
+		{
+			DbRegister register = DbRegister.GetInstance();
+			
+			this.DelayChargeSpin.Value = (float) register["delay_charge"];
+			this.SaturdayCheck.Active = (bool) register["delay_saturday"];
+			this.SundayCheck.Active = (bool) register["delay_sunday"];
+		}
+		
 		private void CleanUserForm()
 		{
 			this.AliasEntry.Text = "";
@@ -65,7 +89,11 @@ namespace omarkhd.Gymk
 			this.OkButton.Clicked += this.DoOk;
 			this.UsersNodeView.CursorChanged += this.SelectCurrent;
 			this.EditButton.Clicked += this.DoEdit;
-			this.PasswordButton.Clicked += DoChangePassword;
+			this.PasswordButton.Clicked += this.DoChangePassword;
+			this.SavePaymentButton.Clicked += this.DoPaymentsOk;
+			this.SaveGralButton.Clicked += this.DoGralOk;
+			this.Close1Button.Clicked += (s, a) => this.Destroy();
+			this.Close2Button.Clicked += (s, a) => this.Destroy();
 		}
 		
 		private void CustomBuild()
@@ -266,12 +294,34 @@ namespace omarkhd.Gymk
 			this.ChangePassword = false;
 			
 			SessionRegistry r = SessionRegistry.GetInstance();
-			bool is_self = ((long) r["user_id"]) == this.CurrentUser.Id;
+			bool is_self = this.CurrentUser != null ? ((long) r["user_id"]) == this.CurrentUser.Id : false;
 			NewPasswordDialog dlg = new NewPasswordDialog(is_self);
 			this.ChangePassword = ((Gtk.ResponseType) dlg.Run()) == ResponseType.Ok;
 			
 			this.OldPassword = dlg.Old;
 			this.NewPassword = dlg.New;
+		}
+		
+		private void DoPaymentsOk(object sender, EventArgs args)
+		{
+			DbRegister register = DbRegister.GetInstance();
+			register["delay_charge"] = string.Format("{0:0.00}", this.DelayChargeSpin.Value);
+			register["delay_saturday"] = this.SaturdayCheck.Active;
+			register["delay_sunday"] = this.SundayCheck.Active;
+			this.Destroy();	
+		}
+		
+		private void DoGralOk(object sender, EventArgs args)
+		{
+			DbRegister register = DbRegister.GetInstance();
+			register["gym_name"] = this.GymNameEntry.Text;
+			register["gym_address"] = this.GymAddressEntry.Text;
+			register["gym_phone"] = this.GymPhoneEntry.Text;
+			register["owner_name"] = this.OwnerNameEntry.Text;
+			register["owner_phone"] = this.OwnerPhoneEntry.Text;
+			register["owner_email"] = this.OwnerEmailEntry.Text;
+			
+			this.Destroy();
 		}
 	}
 }

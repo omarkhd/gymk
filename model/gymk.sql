@@ -12,6 +12,7 @@ drop table if exists MembershipDebt;
 drop table if exists User;
 drop view if exists payment_with_total;
 drop view if exists member_with_client_info;
+drop table if exists Register;
 
 create table Client
 (
@@ -116,6 +117,13 @@ create table User
 	Active boolean not null,
 	constraint User_pk primary key(Id),
 	constraint User_uq unique(Alias)
+);
+
+create table Register
+(
+	Key varchar(45) not null,
+	Value text,
+	constraint Register_pk primary key(Key)
 );
 
 create view payment_with_total as
