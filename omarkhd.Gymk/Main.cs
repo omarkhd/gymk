@@ -16,8 +16,14 @@ namespace omarkhd.Gymk
 			
 			if(login.Success)
 			{				
-				Window w = new GymkWindow();
-				w.ShowAll();			
+				StartLoader loader = new StartLoader();
+				loader.SuccessEvent += delegate()
+				{
+					Window w = new GymkWindow();
+					w.ShowAll();
+				};
+				
+				loader.Start();
 				Application.Run();
 			}
 			

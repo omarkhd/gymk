@@ -136,6 +136,9 @@
     <Compile Include="NewPasswordDialog.cs" />
     <Compile Include="gtk-gui\omarkhd.Gymk.NewPasswordDialog.cs" />
     <Compile Include="models\DbRegister.cs" />
+    <Compile Include="StartLoader.cs" />
+    <Compile Include="gtk-gui\omarkhd.Gymk.StartLoader.cs" />
+    <Compile Include="PaymentScanThread.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
