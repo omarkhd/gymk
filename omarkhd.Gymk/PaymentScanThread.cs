@@ -20,12 +20,14 @@ namespace omarkhd.Gymk
 			this.Loader.Update(0, "Comenzando...");
 			
 			MemberModel mm = new MemberModel();
-			long members = mm.Count();
+			long members = mm.CountActive();
+			//long members = 500;
 			double step = 100.0 / members;
 			double real_percent = 0.0;
 			int percent = 0;
-			IDataReader reader = mm.GetAll();
+			IDataReader reader = mm.GetAllWithJoin(true);
 			
+			//for(int i = 0; i++ < members;)
 			while(reader.Read())
 			{
 				real_percent += step;
@@ -33,7 +35,7 @@ namespace omarkhd.Gymk
 				Thread.Sleep(5);
 				this.Loader.Update(percent, percent + "%");
 				
-				Console.Out.WriteLine(reader["Height"] + ", " + reader["Weight"]);
+				Console.Out.WriteLine(reader["Name"] + ", " + reader["Weight"]);
 				
 				while(Gtk.Application.EventsPending())
 					Gtk.Application.RunIteration();
@@ -44,8 +46,8 @@ namespace omarkhd.Gymk
 				Gtk.Application.RunIteration();
 			Thread.Sleep(500);
 			
-			this.Loader.Success();
-			this.Loader.Destroy();
+			//this.Loader.Success();
+			//this.Loader.Destroy();
 		}
 		
 		public void Launch()
@@ -54,4 +56,3 @@ namespace omarkhd.Gymk
 		}
 	}
 }
-

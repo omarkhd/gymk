@@ -244,7 +244,7 @@ namespace omarkhd.Gymk
 			this.LogoButton.CanFocus = true;
 			this.LogoButton.Name = "LogoButton";
 			this.LogoButton.UseUnderline = true;
-			this.LogoButton.Label = global::Mono.Unix.Catalog.GetString ("(seleccionar logo)\n");
+			this.LogoButton.Label = global::Mono.Unix.Catalog.GetString ("(seleccionar logo)\r\n");
 			this.hbox2.Add (this.LogoButton);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.LogoButton]));
 			w3.Position = 0;

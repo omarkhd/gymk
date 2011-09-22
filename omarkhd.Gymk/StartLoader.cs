@@ -26,6 +26,8 @@ namespace omarkhd.Gymk
 			PaymentScanThread thread = new PaymentScanThread(this);
 			thread.Launch();
 			thread.InnerThread.Join();
+			this.Success();
+			this.Destroy();
 		}
 		
 		public void Update(int percent, string msg)

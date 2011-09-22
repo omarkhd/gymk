@@ -99,6 +99,21 @@ namespace omarkhd.Gymk
 			return this.DoReader(sql);*/
 		}
 		
+		//reader with active members (or non-active)
+		public IDataReader GetAllWithJoin(bool active)
+		{
+			string sql = "select * from member_with_client_info";
+			sql += " where Active = @p0";
+			return this.DoReader(sql, active);
+		}
+		
+		public long CountActive()
+		{
+			string sql = "select count(*) from " + this.TableName;
+			sql += " where Active = @p0";
+			return (long) this.DoScalar(sql, true);
+		}
+		
 		public static Member FromId(long id)
 		{
 			MemberModel mm = new MemberModel();
