@@ -36,6 +36,7 @@ namespace omarkhd.Gymk
 			this.ClientsAction.Activated += this.LaunchClients;
 			this.ConfigAction.Activated += this.LaunchPreferences;
 			this.MembersAction.Activated += this.LaunchMembers;
+			this.AccessModeAction.Activated += this.LaunchAccessMode;
 		}
 		
 		private void Quit(object sender, object args)
@@ -140,6 +141,12 @@ namespace omarkhd.Gymk
 			w.Modal = true;
 			w.TransientFor = this;
 			w.ShowAll();
+		}
+		
+		private void LaunchAccessMode(object sender, EventArgs args)
+		{
+			AccessModeWindow w = new AccessModeWindow();
+			w.Launch();
 		}
 	}
 }

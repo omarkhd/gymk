@@ -36,6 +36,10 @@ namespace omarkhd.Gymk
 
 		private global::Gtk.Action infoAction;
 
+		private global::Gtk.Action VerAction;
+
+		private global::Gtk.Action AccessModeAction;
+
 		private global::Gtk.VBox vbox2;
 
 		private global::Gtk.MenuBar menubar2;
@@ -101,6 +105,12 @@ namespace omarkhd.Gymk
 			this.infoAction = new global::Gtk.Action ("infoAction", global::Mono.Unix.Catalog.GetString ("Acerca de"), null, "gtk-info");
 			this.infoAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Acerca de");
 			w1.Add (this.infoAction, null);
+			this.VerAction = new global::Gtk.Action ("VerAction", global::Mono.Unix.Catalog.GetString ("Ver"), null, null);
+			this.VerAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Ver");
+			w1.Add (this.VerAction, null);
+			this.AccessModeAction = new global::Gtk.Action ("AccessModeAction", global::Mono.Unix.Catalog.GetString ("Modo acceso"), null, null);
+			this.AccessModeAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Modo acceso");
+			w1.Add (this.AccessModeAction, null);
 			this.UIManager.InsertActionGroup (w1, 0);
 			this.AddAccelGroup (this.UIManager.AccelGroup);
 			this.WidthRequest = 600;
@@ -114,7 +124,7 @@ namespace omarkhd.Gymk
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
+			this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='ArchivoAction' action='ArchivoAction'><menu name='addAction' action='addAction'><menuitem name='NewEnrollmentAction' action='NewEnrollmentAction'/><menuitem name='NewClientAction' action='NewClientAction'/></menu><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='EditarAction' action='EditarAction'><menu name='dndMultipleAction' action='dndMultipleAction'><menuitem name='AreasAction' action='AreasAction'/><menuitem name='PacksAction' action='PacksAction'/><menuitem name='ClientsAction' action='ClientsAction'/><menuitem name='MembersAction' action='MembersAction'/></menu><menuitem name='ConfigAction' action='ConfigAction'/></menu><menu name='VerAction' action='VerAction'><menuitem name='AccessModeAction' action='AccessModeAction'/></menu><menu name='AyudaAction' action='AyudaAction'><menuitem name='infoAction' action='infoAction'/></menu></menubar></ui>");
 			this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 			this.menubar2.Name = "menubar2";
 			this.vbox2.Add (this.menubar2);

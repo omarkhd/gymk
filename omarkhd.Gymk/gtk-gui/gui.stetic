@@ -89,6 +89,16 @@
         <property name="ShortLabel" translatable="yes">Acerca de</property>
         <property name="StockId">gtk-info</property>
       </action>
+      <action id="VerAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Ver</property>
+        <property name="ShortLabel" translatable="yes">Ver</property>
+      </action>
+      <action id="AccessModeAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Modo acceso</property>
+        <property name="ShortLabel" translatable="yes">Modo acceso</property>
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="WidthRequest">600</property>
@@ -119,6 +129,9 @@
                   <node type="Menuitem" action="MembersAction" />
                 </node>
                 <node type="Menuitem" action="ConfigAction" />
+              </node>
+              <node type="Menu" action="VerAction">
+                <node type="Menuitem" action="AccessModeAction" />
               </node>
               <node type="Menu" action="AyudaAction">
                 <node type="Menuitem" action="infoAction" />
@@ -4678,6 +4691,108 @@
             <property name="AutoSize">True</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="omarkhd.Gymk.AccessModeWindow" design-size="638 477">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">AccessModeWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="BorderWidth">16</property>
+    <child>
+      <widget class="Gtk.VBox" id="vbox2">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.Image" id="image1">
+            <property name="MemberName" />
+            <property name="HeightRequest">120</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Fixed" id="fixed1">
+            <property name="MemberName" />
+            <property name="HeightRequest">40</property>
+            <property name="HasWindow">False</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.VBox" id="vbox3">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child>
+              <widget class="Gtk.HBox" id="hbox1">
+                <property name="MemberName" />
+                <child>
+                  <widget class="Gtk.Label" id="label1">
+                    <property name="MemberName" />
+                    <property name="WidthRequest">137</property>
+                    <property name="Xalign">1</property>
+                    <property name="LabelProp" translatable="yes">Id:</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Entry" id="entry1">
+                    <property name="MemberName" />
+                    <property name="WidthRequest">300</property>
+                    <property name="HeightRequest">50</property>
+                    <property name="CanFocus">True</property>
+                    <property name="IsEditable">True</property>
+                    <property name="MaxLength">4</property>
+                    <property name="InvisibleChar">●</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Fixed" id="fixed3">
+                    <property name="MemberName" />
+                    <property name="HasWindow">False</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">2</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder />
+            </child>
+            <child>
+              <placeholder />
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">2</property>
+            <property name="AutoSize">True</property>
           </packing>
         </child>
       </widget>
